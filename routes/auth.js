@@ -26,6 +26,7 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", upload.single("image"), (req, res, next) => {
+    const role = req.body.role;
     const username = req.body.username;
     const password = req.body.password;
     const { path } = req.file;
