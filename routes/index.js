@@ -7,16 +7,22 @@ const {
 } = require("../middlewares/index")
 
 const {
-    private
+    private,
+    createPost
 } = require("../controllers/index")
 
 const { MUSICIAN } = require("../roles")
 
+const upload = require("../configs/cloudinary");
+const Post = require('../models/Post');
+
 /* GET home page */
-router.get('/', (req, res, next) => {
-    res.render('index');
+router.get('/', async(req, res, next) => {
+    const posts = await Post.find()
+    res.render('index', { posts });
 });
 
 router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
+router.post('/posting', upload.single("picUrl"), createPost)
 
 module.exports = router;

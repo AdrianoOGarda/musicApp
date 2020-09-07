@@ -10,6 +10,10 @@ const userSchema = new Schema({
         enum: ["MUSICIAN", "USER"],
         default: "USER"
     },
+    posts: [{
+        type: Schema.Types.ObjectId,
+        ref: "Post"
+    }],
 }, {
     timestamps: {
         createdAt: 'created_at',
