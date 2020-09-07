@@ -8,11 +8,6 @@ const postSchema = new Schema({
     },
     picUrl: String,
     picName: String,
-    role: {
-        type: String,
-        enum: ["MUSICIAN", "USER"],
-        default: "USER"
-    },
     comments: [{
         type: Schema.Types.ObjectId,
         ref: "Comment"
