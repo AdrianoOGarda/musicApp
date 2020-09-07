@@ -15,11 +15,29 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/profile",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
-}));
+}), (req, res) => {
+    if (req.user.role === 'MUSICIAN') {
+        res.redirect('/profile');
+    }
+    if (req.user.role === 'USER') {
+        res.redirect('/listener')
+    }
+});
+
+// router.post('/login', passport.authenticate('local', {
+//     failureRedirect: '/login'
+// }), (req, res) => {
+//     if (req.user.isAdmin === true) {
+//         res.redirect('/admin/gifts?filter=review');
+//     }
+//     if (req.user.isAdmin === false) {
+//         res.redirect('/dashboard/received');
+//     }
+// });
+
 
 router.get("/signup", (req, res, next) => {
     res.render("auth/signup");

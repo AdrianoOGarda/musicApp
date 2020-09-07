@@ -10,7 +10,7 @@ const {
     private
 } = require("../controllers/index")
 
-const { MUSICIAN } = require("../roles")
+const { MUSICIAN, USER } = require("../roles")
 
 /* GET home page */
 router.get('/', (req, res, next) => {
@@ -18,5 +18,7 @@ router.get('/', (req, res, next) => {
 });
 
 router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
+
+router.get('/listener', ensureLogin("/login"), checkRole(USER), private)
 
 module.exports = router;
