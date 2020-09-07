@@ -29,7 +29,6 @@ router.post("/signup", upload.single("image"), (req, res, next) => {
     const role = req.body.role;
     const username = req.body.username;
     const password = req.body.password;
-    const role = req.body.role;
     const { path } = req.file;
     if (username === "" || password === "") {
         res.render("auth/signup", { message: "Indicate username and password" });
