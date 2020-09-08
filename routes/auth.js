@@ -20,20 +20,27 @@ router.get("/login", (req, res, next) => {
 });
 
 router.post("/login", passport.authenticate("local", {
-    successRedirect: "/profile",
     failureRedirect: "/auth/login",
     failureFlash: true,
     passReqToCallback: true
-}));
+}), (req, res) => {
+    if (req.user.role === 'MUSICIAN') {
+        res.redirect('/profile');
+    }
+    if (req.user.role === 'USER') {
+        res.redirect('/listener')
+    }
+});
+
 
 router.get("/signup", (req, res, next) => {
     res.render("auth/signup");
 });
 
 router.post("/signup", upload.single("image"), (req, res, next) => {
+    const role = req.body.role;
     const username = req.body.username;
     const password = req.body.password;
-    const role = req.body.role;
     const { path } = req.file;
     if (username === "" || password === "") {
         res.render("auth/signup", { message: "Indicate username and password" });

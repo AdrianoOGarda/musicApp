@@ -29,3 +29,7 @@ exports.musicPost = async(req, res) => {
     })
     res.redirect("/profile")
 }
+
+exports.privateListener = async(req, res) => {
+    res.render("listener", req.user)
+}

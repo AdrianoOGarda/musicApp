@@ -1,0 +1,7 @@
+<h1>Welcome to your profile {{username}}</h1>
+<img style="width: 30px" src="{{imageUrl}}" alt="Profile image">
+<div>
+  {{#each favouriteArtist}}
+  {{> artistUserCard this}} 
+  {{/each}}
+</div>

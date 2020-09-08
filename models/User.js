@@ -10,6 +10,10 @@ const userSchema = new Schema({
         unique: true
     },
     googleID: String,
+    favouriteArtist: [{
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    }],
     role: {
         type: String,
         enum: ["MUSICIAN", "USER"],

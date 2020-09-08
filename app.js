@@ -15,7 +15,7 @@ const flash = require("connect-flash");
 
 
 mongoose
-    .connect('mongodb://localhost/musicapp', { useNewUrlParser: true })
+    .connect(process.env.DB, { useNewUrlParser: true })
     .then(x => {
         console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     })
@@ -45,6 +45,7 @@ app.use(require('node-sass-middleware')({
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'hbs');
+hbs.registerPartials(path.join(__dirname, 'views', 'partials'))
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
@@ -73,9 +74,6 @@ app.use(session({
 }))
 app.use(flash());
 require('./passport')(app);
-//require('./passport/googleStrategy')
-
-
 
 
 const index = require('./routes/index');
@@ -83,8 +81,5 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
-
-
-
 
 module.exports = app;
