@@ -7,7 +7,7 @@ const userSchema = new Schema({
     imageUrl: String,
     favouriteArtist: [{
         type: Schema.Types.ObjectId,
-        ref: "Artist"
+        ref: "User"
     }],
     role: {
         type: String,
