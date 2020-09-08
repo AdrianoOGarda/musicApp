@@ -5,6 +5,11 @@ const userSchema = new Schema({
     username: String,
     password: String,
     imageUrl: String,
+    email: {
+        type: String,
+        unique: true
+    },
+    googleID: String,
     role: {
         type: String,
         enum: ["MUSICIAN", "USER"],

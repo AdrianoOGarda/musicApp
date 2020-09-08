@@ -5,6 +5,11 @@ const User = require("../models/User");
 
 const upload = require("../configs/cloudinary")
 
+const {
+    googleProcess,
+    googleRedirect
+} = require("../controllers/googleStrategy")
+
 // Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
@@ -65,5 +70,9 @@ router.get("/logout", (req, res) => {
     req.logout();
     res.redirect("/");
 });
+
+//SOCIAL
+router.get("/auth/google", googleProcess)
+router.get("/auth/google/callback", googleRedirect)
 
 module.exports = router;

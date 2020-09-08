@@ -8,7 +8,8 @@ const {
 
 const {
     private,
-    createPost
+    createPost,
+    musicPost
 } = require("../controllers/index")
 
 const { MUSICIAN } = require("../roles")
@@ -24,5 +25,7 @@ router.get('/', async(req, res, next) => {
 
 router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
 router.post('/posting', upload.single("picUrl"), createPost)
+
+router.post('/musicPost', musicPost)
 
 module.exports = router;
