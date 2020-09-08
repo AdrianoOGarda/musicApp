@@ -10,20 +10,25 @@ const {
     private,
     createPost,
     musicPost,
+    videoPost,
     privateListener
 } = require("../controllers/index")
 
 const { MUSICIAN, USER } = require("../roles");
 const User = require('../models/User');
-//const { findOne } = require('../models/User');
+const Music = require('..//models/Music');
 
 const upload = require("../configs/cloudinary");
 const Post = require('../models/Post');
+const Video = require('../models/Video');
 
 /* GET home page */
 router.get('/', async(req, res, next) => {
     const posts = await Post.find()
-    res.render('index', { posts });
+    const musicians = await User.find({ role: 'MUSICIAN' })
+    const songs = await Music.find()
+    const videos = await Video.find()
+    res.render('index', { posts, musicians, songs, videos });
 });
 
 router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
@@ -31,13 +36,7 @@ router.post('/posting', upload.single("picUrl"), createPost)
 
 router.post('/musicPost', musicPost)
 
-
-router.get('/', async(req, res, next) => {
-    const musicians = await User.find({ role: 'MUSICIAN' })
-        //console.log(musicians)
-    res.render('index', { musicians });
-});
-
+router.post('/videoPost', videoPost)
 
 router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener)
 

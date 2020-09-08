@@ -1,6 +1,7 @@
 const User = require("../models/User")
 const Post = require("../models/Post")
 const Music = require('../models/Music')
+const Video = require('../models/Video')
 
 exports.private = async(req, res) => {
     const userWithPosts = await User.findById(req.user._id).populate("posts")
@@ -28,6 +29,15 @@ exports.musicPost = async(req, res) => {
         audiourl
     })
     res.redirect("/profile")
+}
+
+exports.videoPost = async(req, res) => {
+    const { content, videourl } = req.body
+    const video = await Video.create({
+        content,
+        videourl
+    })
+    res.redirect('/profile')
 }
 
 exports.privateListener = async(req, res) => {

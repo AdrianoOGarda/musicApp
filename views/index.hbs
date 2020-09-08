@@ -15,3 +15,26 @@
   {{>artistCard this}}
   {{/each}}
 </div>
+
+<br>
+<br>
+
+{{#each songs}}
+<div>
+<audio controls>
+  <source src="{{this.audiourl}}" type="audio/wav">
+  <source src="{{this.audiourl}}" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+</div>
+{{/each}}
+
+{{#each videos}}
+<div>
+  <video width="320" height="240" controls>
+  <source src="{{this.videourl}}" type="video/mp4">
+  <source src="{{this.videourl}}" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+</div>
+{{/each}}

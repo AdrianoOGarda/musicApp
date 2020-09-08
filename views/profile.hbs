@@ -48,6 +48,39 @@ $audioInput.onchange = async e => {
 }
 </script>
 
+
+{{!-- Videos --}}
+<form action="/videoPost" method="POST">
+<label for="content">Content:</label>
+    <input type="text" id="input-content" name="content" placeholder="Your post content"/>
+  <input type="file" name="video" id="video">
+  <input type="text" id="videourl" name="videourl">
+  <button type="submit">Submit your music video</button>
+</form>
+
+<script>
+  const $videoInput = document.querySelector('#video')
+  const $videourl = document.querySelector('#videourl')
+
+$videoInput.onchange = async e => {
+  //e.target.files almacena los archivos selecionados
+  console.log(e.target.files[0])
+  
+  const data = new FormData()
+  data.append("file", e.target.files[0]);
+  data.append("upload_preset", "musicApp");
+  const res = await axios.post(
+    /*                        cloudname👇    👇 tipo de recurso     */
+    "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
+    data
+  );
+  $videourl.value = res.data.secure_url
+}
+</script>
+
+
+
+
 {{#each posts}}
 <p>{{content}}</p>
 {{/each}}
