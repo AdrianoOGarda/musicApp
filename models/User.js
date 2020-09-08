@@ -5,6 +5,10 @@ const userSchema = new Schema({
     username: String,
     password: String,
     imageUrl: String,
+    favouriteArtist: [{
+        type: Schema.Types.ObjectId,
+        ref: "Artist"
+    }],
     role: {
         type: String,
         enum: ["MUSICIAN", "USER"],

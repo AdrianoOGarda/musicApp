@@ -27,17 +27,6 @@ router.post("/login", passport.authenticate("local", {
     }
 });
 
-// router.post('/login', passport.authenticate('local', {
-//     failureRedirect: '/login'
-// }), (req, res) => {
-//     if (req.user.isAdmin === true) {
-//         res.redirect('/admin/gifts?filter=review');
-//     }
-//     if (req.user.isAdmin === false) {
-//         res.redirect('/dashboard/received');
-//     }
-// });
-
 
 router.get("/signup", (req, res, next) => {
     res.render("auth/signup");
