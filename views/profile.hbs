@@ -57,6 +57,9 @@ $audioInput.onchange = async e => {
 <button type="submit">Post Concert</button>
 </form>
 
+{{#each musicianConcerts}}
+{{>concertCard this}}
+{{/each}}
 
 
 {{#each posts}}

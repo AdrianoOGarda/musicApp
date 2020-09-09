@@ -11,7 +11,10 @@ exports.home = async(req, res) => {
 
 exports.private = async(req, res) => {
     const userWithPosts = await User.findById(req.user._id).populate("posts")
-    res.render("profile", userWithPosts)
+    const { username } = req.user
+    const musicianConcerts = await Concert.find({ musician: username })
+    console.log(musicianConcerts)
+    res.render("profile", { userWithPosts, musicianConcerts })
 }
 
 exports.createPost = async(req, res) => {
