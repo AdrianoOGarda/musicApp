@@ -23,6 +23,14 @@ const userSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "Post"
     }],
+    songs: [{
+        type: Schema.Types.ObjectId,
+        ref: "Music"
+    }],
+    videos: [{
+        type: Schema.Types.ObjectId,
+        ref: "Video"
+    }],
 }, {
     timestamps: {
         createdAt: 'created_at',

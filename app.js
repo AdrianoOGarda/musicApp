@@ -8,6 +8,12 @@ const hbs = require('hbs');
 const mongoose = require('mongoose');
 const logger = require('morgan');
 const path = require('path');
+const { readFile, writeFile } = require("fs")
+const Mux = require("@mux/mux-node")
+const { Video, Data } = new Mux(
+    process.env.MUX_TOKEN_ID,
+    process.env.MUX_TOKEN_SECRET
+)
 
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
@@ -81,5 +87,8 @@ app.use('/', index);
 
 const authRoutes = require('./routes/auth');
 app.use('/auth', authRoutes);
+
+const concertRoutes = require('./routes/concert');
+app.use('/', concertRoutes)
 
 module.exports = app;

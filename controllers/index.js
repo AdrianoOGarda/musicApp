@@ -4,9 +4,11 @@ const Music = require('../models/Music')
 const Video = require('../models/Video')
 
 exports.private = async(req, res) => {
-    const userWithPosts = await User.findById(req.user._id).populate("posts")
+    const userWithPosts = await User.findById(req.user._id).populate("posts").populate("songs").populate({
+        path: 'videos'
+    })
     res.render("profile", userWithPosts)
-        //console.log(`este es el consolelog: ${userPosts}`)
+    console.log(`este es el consolelog: ${userWithPosts}`)
         //console.log(req.user)
 }
 
@@ -24,10 +26,11 @@ exports.createPost = async(req, res) => {
 
 exports.musicPost = async(req, res) => {
     const { content, audiourl } = req.body
-    const music = await Music.create({
+    const song = await Music.create({
         content,
         audiourl
     })
+    await User.findByIdAndUpdate(req.user._id, { $push: { songs: song } }, { new: true })
     res.redirect("/profile")
 }
 
@@ -37,6 +40,7 @@ exports.videoPost = async(req, res) => {
         content,
         videourl
     })
+    await User.findByIdAndUpdate(req.user._id, { $push: { videos: video } }, { new: true })
     res.redirect('/profile')
 }
 

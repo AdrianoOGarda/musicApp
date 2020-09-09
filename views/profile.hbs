@@ -83,4 +83,25 @@ $videoInput.onchange = async e => {
 
 {{#each posts}}
 <p>{{content}}</p>
+<img src="{{picUrl}}" alt="foto">
 {{/each}}
+
+{{#each videos}}
+<div>
+  <video width="320" height="240" controls>
+  <source src="{{videourl}}" type="video/mp4">
+  <source src="{{videourl}}" type="video/ogg">
+  Your browser does not support the video tag.
+</video>
+</div>
+{{/each }}
+
+{{#each songs}}
+<div>
+<audio controls>
+  <source src="{{audiourl}}" type="audio/wav">
+  <source src="{{audiourl}}" type="audio/mpeg">
+  Your browser does not support the audio tag.
+</audio>
+</div>
+{{/each }}
