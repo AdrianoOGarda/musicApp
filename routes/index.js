@@ -1,5 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User');
+const Post = require('../models/Post');
+const upload = require("../configs/cloudinary");
+const { MUSICIAN, USER } = require("../roles");
 
 const {
     ensureLogin,
@@ -10,42 +14,24 @@ const {
     private,
     createPost,
     musicPost,
-    privateListener
+    privateListener,
+    follow,
+    home,
+    concert
 } = require("../controllers/index")
 
-const { MUSICIAN, USER } = require("../roles");
-const User = require('../models/User');
-//const { findOne } = require('../models/User');
+router.get('/', home);
 
-const upload = require("../configs/cloudinary");
-const Post = require('../models/Post');
+router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private);
 
-/* GET home page */
-router.get('/', async(req, res, next) => {
-    const posts = await Post.find()
-    res.render('index', { posts });
-});
+router.post('/posting', upload.single("picUrl"), createPost);
 
-router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
-router.post('/posting', upload.single("picUrl"), createPost)
+router.post('/musicPost', musicPost);
 
-router.post('/musicPost', musicPost)
+router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener);
 
+router.post('/follow', follow);
 
-router.get('/', async(req, res, next) => {
-    const musicians = await User.find({ role: 'MUSICIAN' })
-        //console.log(musicians)
-    res.render('index', { musicians });
-});
-
-
-router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener)
-
-router.post('/follow', async(req, res) => {
-    const { name } = req.body
-    const { _id } = await User.findOne({ username: name })
-    await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
-    res.redirect('/')
-})
+router.post('/concert', concert)
 
 module.exports = router;
