@@ -1,5 +1,5 @@
-<h1>Welcome to your profile {{username}}</h1>
-<img src="{{imageUrl}}" alt="Profile image">
+<h1>Welcome to your profile {{userWithPosts.username}}</h1>
+<img style="width: 30px" src="{{imageUrl}}" alt="Profile image">
 
 <h2>Share your music!</h2>
 <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
@@ -18,7 +18,7 @@
 
 <br>
 <br>
- 
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 <form action="/musicPost" method="POST">
 <label for="content">Content:</label>
@@ -79,6 +79,20 @@ $videoInput.onchange = async e => {
 </script>
 
 
+<form action="/concert" method="post">
+<label for="concertName">Concert Name</label>
+<input type="text" id="concertName" name="concertName">
+<label for="date">Date</label>
+<input type="date" name="date" id="date">
+<label for="price">Price</label>
+<input type="number" name="price" id="price">
+<input type="musician" id="musician" name="musician" value="{{userWithPosts.username}}" hidden>
+<button type="submit">Post Concert</button>
+</form>
+
+{{#each musicianConcerts}}
+{{>concertCard this}}
+{{/each}}
 
 
 {{#each posts}}

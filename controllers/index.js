@@ -1,5 +1,6 @@
 const User = require("../models/User")
 const Post = require("../models/Post")
+const Concert = require("../models/Concert")
 const Music = require('../models/Music')
 const Video = require('../models/Video')
 
@@ -7,9 +8,20 @@ exports.private = async(req, res) => {
     const userWithPosts = await User.findById(req.user._id).populate("posts").populate("songs").populate({
         path: 'videos'
     })
-    res.render("profile", userWithPosts)
+    const { username } = req.user
+    const musicianConcerts = await Concert.find({ band: username })
+    res.render("profile", { userWithPosts, musicianConcerts })
     console.log(`este es el consolelog: ${userWithPosts}`)
         //console.log(req.user)
+    const mercadoPago = require('../configs/mercadoPago')
+}
+
+exports.home = async(req, res) => {
+    const posts = await Post.find()
+    const musicians = await User.find({ role: 'MUSICIAN' })
+    const songs = await Music.find()
+    const videos = await Video.find()
+    res.render('index', { posts, musicians, songs, videos });
 }
 
 exports.createPost = async(req, res) => {
@@ -46,4 +58,11 @@ exports.videoPost = async(req, res) => {
 
 exports.privateListener = async(req, res) => {
     res.render("listener", req.user)
+}
+
+exports.follow = async(req, res) => {
+    const { name } = req.body
+    const { _id } = await User.findOne({ username: name })
+    await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
+    res.redirect('/')
 }

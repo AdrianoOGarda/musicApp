@@ -1,5 +1,11 @@
 const express = require('express');
 const router = express.Router();
+const User = require('../models/User');
+const Post = require('../models/Post');
+const upload = require("../configs/cloudinary");
+const { MUSICIAN, USER } = require("../roles");
+const Music = require('..//models/Music');
+const Video = require('../models/Video');
 
 const {
     ensureLogin,
@@ -11,40 +17,44 @@ const {
     createPost,
     musicPost,
     videoPost,
-    privateListener
+    privateListener,
+    follow,
+    home
 } = require("../controllers/index")
 
-const { MUSICIAN, USER } = require("../roles");
-const User = require('../models/User');
-const Music = require('..//models/Music');
+const {
+    concert,
+    concertPay
+} = require('../controllers/concert')
 
-const upload = require("../configs/cloudinary");
-const Post = require('../models/Post');
-const Video = require('../models/Video');
 
 /* GET home page */
-router.get('/', async(req, res, next) => {
-    const posts = await Post.find()
-    const musicians = await User.find({ role: 'MUSICIAN' })
-    const songs = await Music.find()
-    const videos = await Video.find()
-    res.render('index', { posts, musicians, songs, videos });
-});
+// router.get('/', async(req, res, next) => {
+//     const posts = await Post.find()
+//     const musicians = await User.find({ role: 'MUSICIAN' })
+//     const songs = await Music.find()
+//     const videos = await Video.find()
+//     res.render('index', { posts, musicians, songs, videos });
+// });
 
-router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private)
-router.post('/posting', upload.single("picUrl"), createPost)
 
-router.post('/musicPost', musicPost)
+router.get('/', home);
+
+router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private);
+
+router.post('/posting', upload.single("picUrl"), createPost);
+
+router.post('/musicPost', musicPost);
+
+router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener);
 
 router.post('/videoPost', videoPost)
+router.post('/follow', follow);
 
-router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener)
+router.post('/concert', concert)
 
-router.post('/follow', async(req, res) => {
-    const { name } = req.body
-    const { _id } = await User.findOne({ username: name })
-    await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
-    res.redirect('/')
-})
+router.get('/concert-detail/:concertId', concertPay);
+
+
 
 module.exports = router;
