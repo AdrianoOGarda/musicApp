@@ -2,7 +2,8 @@
 <h2>{{band}}</h2>
 <h3>{{date}}</h3>
 <h3>{{price}}</h3>
-<form method="POST">
+
+<form method="POST" action="/bought-ticket">
   <script
     src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
     data-preference-id='{{preferenceId}}'>

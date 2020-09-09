@@ -80,13 +80,13 @@ $videoInput.onchange = async e => {
 
 
 <form action="/concert" method="post">
-<label for="concertName">Concert Name</label>
-<input type="text" id="concertName" name="concertName">
+<label for="name">Concert Name</label>
+<input type="text" id="name" name="name">
 <label for="date">Date</label>
 <input type="date" name="date" id="date">
 <label for="price">Price</label>
 <input type="number" name="price" id="price">
-<input type="musician" id="musician" name="musician" value="{{userWithPosts.username}}" hidden>
+<input type="band" id="band" name="band" value="{{userWithPosts.username}}" hidden>
 <button type="submit">Post Concert</button>
 </form>
 

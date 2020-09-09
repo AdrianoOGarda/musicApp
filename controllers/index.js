@@ -10,10 +10,8 @@ exports.private = async(req, res) => {
     })
     const { username } = req.user
     const musicianConcerts = await Concert.find({ band: username })
+    console.log(musicianConcerts)
     res.render("profile", { userWithPosts, musicianConcerts })
-    console.log(`este es el consolelog: ${userWithPosts}`)
-        //console.log(req.user)
-    const mercadoPago = require('../configs/mercadoPago')
 }
 
 exports.home = async(req, res) => {
@@ -21,7 +19,8 @@ exports.home = async(req, res) => {
     const musicians = await User.find({ role: 'MUSICIAN' })
     const songs = await Music.find()
     const videos = await Video.find()
-    res.render('index', { posts, musicians, songs, videos });
+    const musicianConcerts = await Concert.find()
+    res.render('index', { posts, musicians, songs, videos, musicianConcerts });
 }
 
 exports.createPost = async(req, res) => {

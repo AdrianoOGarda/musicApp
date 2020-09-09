@@ -53,7 +53,7 @@ router.post('/follow', follow);
 
 router.post('/concert', concert)
 
-router.get('/concert-detail/:concertId', concertPay);
+router.get('/concert-pay/:concertId', concertPay);
 
 
 

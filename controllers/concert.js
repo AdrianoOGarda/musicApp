@@ -1,5 +1,6 @@
 const axios = require("axios")
 const Concert = require("../models/Concert")
+const mercadoPago = require('../configs/mercadoPago')
 
 exports.concertForm = (req, res) => { res.render("newConcert") }
 
@@ -48,12 +49,12 @@ exports.concert = async(req, res) => {
     const { _id } = req.user
     const musicianId = _id
         //console.log(_id)
-    const { date, concertName, musician, price } = req.body
-    console.log(musician)
+    const { date, name, band, price } = req.body
+    console.log(band)
     const concert = await Concert.create({
         date,
-        concertName,
-        musician,
+        name,
+        band,
         price,
         musicianId
     })
@@ -64,10 +65,10 @@ exports.concert = async(req, res) => {
 exports.concertPay = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)
         //console.log(concert)
-    const { concertName, musician, price } = concert
+    const { name, band, price } = concert
     const preference = {
         items: [{
-            title: `Ticket Concert: ${concertName} | Musician: ${musician}`,
+            title: `Ticket Concert: ${name} | Musician: ${band}`,
             unit_price: Number(price),
             quantity: 1,
         }]
@@ -75,5 +76,9 @@ exports.concertPay = async(req, res) => {
 
     const { body: { id: preferenceId } } = await mercadoPago.preferences.create(preference)
     concert.preferenceId = preferenceId
-    res.render("concertDetail", concert)
+    res.render("concertPay", concert)
+}
+
+exports.boughtTicket = (req, res) => {
+    res.render("boughtTicket")
 }
