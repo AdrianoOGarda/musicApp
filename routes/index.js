@@ -17,7 +17,8 @@ const {
     privateListener,
     follow,
     home,
-    concert
+    concert,
+    concertDetail
 } = require("../controllers/index")
 
 router.get('/', home);
@@ -33,5 +34,9 @@ router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener)
 router.post('/follow', follow);
 
 router.post('/concert', concert)
+
+router.get('/concert-detail/:concertId', concertDetail);
+
+
 
 module.exports = router;

@@ -2,6 +2,7 @@ const User = require("../models/User")
 const Post = require("../models/Post")
 const Concert = require("../models/Concert")
 const Music = require('../models/Music')
+const mercadoPago = require('../configs/mercadoPago')
 
 exports.home = async(req, res) => {
     const posts = await Post.find()
@@ -13,7 +14,8 @@ exports.private = async(req, res) => {
     const userWithPosts = await User.findById(req.user._id).populate("posts")
     const { username } = req.user
     const musicianConcerts = await Concert.find({ musician: username })
-    console.log(musicianConcerts)
+        //console.log(musicianConcerts)
+
     res.render("profile", { userWithPosts, musicianConcerts })
 }
 
@@ -54,14 +56,33 @@ exports.concert = async(req, res) => {
     console.log(req.user)
     const { _id } = req.user
     const musicianId = _id
-    console.log(_id)
-    const { date, concertName, musician } = req.body
+        //console.log(_id)
+    const { date, concertName, musician, price } = req.body
+    console.log(musician)
     const concert = await Concert.create({
         date,
         concertName,
         musician,
+        price,
         musicianId
     })
     console.log(concert)
     res.redirect("/profile")
+}
+
+exports.concertDetail = async(req, res) => {
+    const concert = await Concert.findById(req.params.concertId)
+        //console.log(concert)
+    const { concertName, musician, price } = concert
+    const preference = {
+        items: [{
+            title: `Ticket Concert: ${concertName} | Musician: ${musician}`,
+            unit_price: Number(price),
+            quantity: 1,
+        }]
+    };
+
+    const { body: { id: preferenceId } } = await mercadoPago.preferences.create(preference)
+    concert.preferenceId = preferenceId
+    res.render("concertDetail", concert)
 }

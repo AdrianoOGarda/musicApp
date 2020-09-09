@@ -4,6 +4,7 @@ const concertSchema = new Schema({
     concertName: String,
     date: Date,
     musician: String,
+    price: Number,
     musicianId: {
         type: Schema.Types.ObjectId,
         ref: "User"
