@@ -5,7 +5,8 @@ const { USER } = require("../roles");
 
 const {
     ensureLogin,
-    checkRole
+    checkRole,
+    catchErrors
 } = require("../middlewares/index")
 
 const {
@@ -15,14 +16,12 @@ const {
     boughtTicket
 } = require("../controllers/concert")
 
-//router.get("/concert/new", concertForm)
+router.post("/concert/new", catchErrors(createConcert))
 
-router.post("/concert/new", createConcert)
+router.post('/concert-pay/:concertId', ensureLogin("/auth/login"), checkRole(USER), catchErrors(concertPay));
 
-router.post('/concert-pay/:concertId', ensureLogin("/auth/login"), checkRole(USER), concertPay);
+router.post("/bought-ticket/:concertId", catchErrors(boughtTicket))
 
-router.post("/bought-ticket/:concertId", boughtTicket)
-
-router.post("/concert-detail", concertDetail)
+router.post("/concert-detail", catchErrors(concertDetail))
 
 module.exports = router;
