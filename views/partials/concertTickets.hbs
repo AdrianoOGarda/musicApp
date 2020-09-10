@@ -4,4 +4,10 @@
       <h3>Cocierto Comprado</h2>
       <h2 class="card-title">{{this.name}}</h2>
       <h3>{{band}}</h2>
+      <form action="/concert-detail" method="post">
+      <input type="text" name="streamKey" value="{{streamKey}}" hidden>
+      <input type="text" name="name" value="{{name}}" hidden>
+      <input type="text" name="playbackId" value="{{playbackId}}" hidden>
+      <button type="submit">Go to Concert</button>
+      </form>
 </div>

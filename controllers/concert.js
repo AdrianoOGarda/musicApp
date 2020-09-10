@@ -39,12 +39,10 @@ exports.createConcert = async(req, res) => {
 }
 
 
-exports.concertDetail = async(req, res) => {
-    console.log(req.params.concertId)
-    const concert = await Concert.findById(req.params.concertId)
+exports.concertDetail = (req, res) => {
+    const concert = req.body
     res.render("concertDetail", concert)
 }
-
 
 // exports.concert = async(req, res) => {
 //     console.log(req.body)

@@ -6,7 +6,7 @@ passport.serializeUser((loggedInUser, cb) => {
 });
 
 passport.deserializeUser(async(userIdFromSession, cb) => {
-    const userDocument = await User.findById(userIdFromSession).populate("favouriteArtist") //.populate('tickets')
-    console.log(userDocument)
+    const userDocument = await User.findById(userIdFromSession).populate('tickets').populate("favouriteArtist")
+        //console.log(userDocument)
     cb(null, userDocument);
 })

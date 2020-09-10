@@ -40,13 +40,13 @@ const {
 
 router.get('/', home);
 
-router.get('/profile', ensureLogin("/login"), checkRole(MUSICIAN), private);
+router.get('/profile', ensureLogin("/auth/login"), checkRole(MUSICIAN), private);
 
 router.post('/posting', upload.single("picUrl"), createPost);
 
 router.post('/musicPost', musicPost);
 
-router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener);
+router.get('/listener', ensureLogin("/auth/login"), checkRole(USER), privateListener);
 
 router.post('/videoPost', videoPost)
 
@@ -54,7 +54,7 @@ router.post('/follow', follow);
 
 // router.post('/concert', concert)
 
-router.get('/concert-pay/:concertId', concertPay);
+
 
 
 
