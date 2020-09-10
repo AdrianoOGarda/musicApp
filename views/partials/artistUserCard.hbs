@@ -3,4 +3,8 @@
     <img style="width: 50px"  src="{{this.imageUrl}}" alt="{{this.username}}"/>
     <div class="card-body">
       <h5 class="card-title">{{this.username}}</h5>
+      <form action="/artist-detail" method="post">
+      <input type="text" name="_id" value="{{this._id}}" hidden>
+      <button type="submit">See More</button>
+      </form>
 </div>

@@ -1,5 +1,11 @@
-<h1>Welcome to your profile {{userWithPosts.username}}</h1>
-<img style="width: 30px" src="{{userWithPosts.imageUrl}}" alt="Profile image">
+<h1>Welcome to your profile {{username}}</h1>
+<img style="width: 30px" src="{{imageUrl}}" alt="Profile image">
+
+<h2>See My Public Profile</h2>
+<form action="/artist-detail" method="post">
+    <input type="text" name="_id" value="{{_id}}" hidden>
+    <button type="submit">Public Profile</button>
+</form>
 
 <h2>Share your music!</h2>
 <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
@@ -80,14 +86,20 @@ $videoInput.onchange = async e => {
 
 <a href="/concert/new">Create New Concert</a>
 
-{{#each musicianConcerts}}
-{{>concertCard this}}
-{{/each}}
-
-
-{{#each posts}}
-<p>{{content}}</p>
-<img src="{{picUrl}}" alt="foto">
+{{#each tickets}}
+<p>Concert</p>
+<p>{{name}}</p>
+<p>Fecha: {{date}}</p>
+<p>${{price}}</p>
+<p>Stream Key:</p>
+<p>{{streamKey}}</p>
+<p>Server: rtmps://global-live.mux.com:443/app</p>
+<small>We recommend using OBS</small>
+<form action="/concert-detail" method="post">
+    <input type="text" name="name" value="{{name}}" hidden>
+    <input type="text" name="playbackId" value="{{playbackId}}" hidden>
+    <button type="submit">Go to Concert</button>
+</form>
 {{/each}}
 
 {{#each videos}}
@@ -109,3 +121,8 @@ $videoInput.onchange = async e => {
 </audio>
 </div>
 {{/each }}
+
+{{#each posts}}
+<p>{{content}}</p>
+<img src="{{picUrl}}" alt="foto">
+{{/each}}

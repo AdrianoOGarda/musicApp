@@ -5,12 +5,11 @@ const Music = require('../models/Music')
 const Video = require('../models/Video')
 
 exports.private = async(req, res) => {
-    const userWithPosts = await User.findById(req.user._id).populate("posts").populate("songs").populate({
+    const userWithPosts = await User.findById(req.user._id).populate("posts").populate("songs").populate("tickets").populate({
         path: 'videos'
     })
-    const { username } = req.user
-    const musicianConcerts = await Concert.find({ band: username })
-    res.render("profile", { userWithPosts, musicianConcerts })
+    console.log(userWithPosts)
+    res.render("profile", userWithPosts)
 }
 
 exports.home = async(req, res) => {
@@ -55,7 +54,6 @@ exports.videoPost = async(req, res) => {
 }
 
 exports.privateListener = async(req, res) => {
-    //console.log(req.user)
     res.render("listener", req.user)
 }
 
@@ -64,4 +62,13 @@ exports.follow = async(req, res) => {
     const { _id } = await User.findOne({ username: name })
     await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
     res.redirect('/')
+}
+
+exports.artistDetail = async(req, res) => {
+    const { _id } = req.body
+    const artist = await User.findById(_id).populate("posts").populate("songs").populate("tickets").populate({
+        path: 'videos'
+    })
+    console.log(artist)
+    res.render("artistDetail", artist)
 }
