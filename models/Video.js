@@ -6,11 +6,7 @@ const videoSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    videourl: String,
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }]
+    videourl: String
 }, {
     timestamps: true
 })

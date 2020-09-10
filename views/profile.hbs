@@ -48,46 +48,48 @@
       <br />
       <strong style="text-decoration:underline">{{userWithPosts.username}}</strong>
     </h1>
-
   </div>
 
+<div class="formsDiv" style="display:flex; justify-content: space-between;">
 
   {{!-- PRIMER FORM --}}
+  <div style="width:280px;">
   <h2 style="font-size: 20px">Share a photo</h2>
  <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
   <div class="form-group">
     <input type="text" id="input-content" name="content" placeholder="Body">
-    <small id="emailHelp" class="form-text text-muted">Speak your mind</small>
+    <small id="textHelp" class="form-text text-muted">Speak your mind</small>
   </div>
   <div class="form-group">
     <input type="text" name="picName" id="picName" placeholder="Your pic's title">
   </div>
-  <div class="form-group form-check">
+  <div class="form-group">
     <input type="file" name="picUrl" id="image-input" class="form-control-file" />
   </div>
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+</div>
 
-    <br>
-    <br>
+   
 
 
     {{!-- SEGUNDO FROM --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 
+<div>
  <h2 style="font-size: 20px">Share a song</h2>
  <form action="/musicPost" method="POST">
-  <div class="form-group">
+  <div class="form-group" style="width:280px;">
     <input type="text" id="input-content" name="content" placeholder="Your song's title" />
   </div>
-  <div class="form-group">
-    <input type="file" name="audio" id="audio"> <input type="text" id="audiourl" name="audiourl">
+  <div class="form-group" style="width:280px;">
+    <input type="file" name="audio" id="audio" style="width:280px;"> <input type="text" id="audiourl" name="audiourl">
   </div>
   <button type="submit" class="btn btn-primary">Upload your song!</button>
 </form>
+</div>
 
-    <br>
-    <br>
+    
 
 
     {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
@@ -121,13 +123,27 @@
 
 
     {{!-- Videos --}}
+    <div>
+<h2 style="font-size: 20px">Share a music video</h2>
+ <form action="/videoPost" method="POST">
+  <div class="form-group" style="width:280px;">
+    <input type="text" id="input-content" name="content" placeholder="Your video´s title" />
+  </div>
+  <div class="form-group" style="width:280px;">
+    <input type="file" name="video" id="video" style="width:280px;"> <input type="text" id="videourl" name="videourl">
+  </div>
+  <button type="submit" class="btn btn-primary">Upload your song!</button>
+</form>
+</div>
+
+{{!-- 
     <form action="/videoPost" method="POST">
       <label for="content">Content:</label>
       <input type="text" id="input-content" name="content" placeholder="Your post content" />
       <input type="file" name="video" id="video">
       <input type="text" id="videourl" name="videourl">
       <button type="submit">Submit your music video</button>
-    </form>
+    </form> --}}
 
     <script>
       const $videoInput = document.querySelector('#video')
@@ -149,20 +165,78 @@
       }
     </script>
 
+</div>
 
-    {{!-- TERCER FORM --}}
-    <form action="/concert" method="post">
-      <label for="concertName">Concert Name</label>
-      <input type="text" id="concertName" name="concertName">
-      <label for="date">Date</label>
-      <input type="date" name="date" id="date">
-      <label for="price">Price</label>
-      <input type="number" name="price" id="price">
-      <input type="musician" id="musician" name="musician" value="{{userWithPosts.username}}" hidden>
-      <button type="submit">Post Concert</button>
-    </form>
+{{!-- FORM PARA CONCIERTOS  --}}
+<div id="concertForm" style="padding-top: 35px; padding-bottom: 25px;">
+<div class="card">
+    <h5 class="card-header info-color white-text text-center py-4">
+        <strong>Create a concert!</strong>
+    </h5>
+    <!--Card content-->
+    <div class="card-body px-lg-5">
+        <!-- Form -->
+        <form action="/concert/new" method="POST" class="text-center" style="color: #757575;" action="#!">
+            <p>Set up your concert by filling the form below</p>
+            <!-- Name -->
+            <div class="md-form mt-3">
+                <input type="text" name="name" id="name" class="form-control">
+                <label for="name">Your concert's title</label>
+            </div>
+            <!-- Date -->
+            <div class="md-form">
+                <input type="date" name="date" id="date" class="form-control">
+                <label for="date">Date</label>
+            </div>
+            {{!-- PRICE --}}
+            <div class="md-form">
+                <input type="number" name="price" id="price" class="form-control">
+                <label for="price">Price</label>
+            </div>
+            {{!-- DURATION --}}
+            <div class="md-form">
+                <input type="text" name="duration" id="duration" class="form-control">
+                <label for="duration">Duration (in seconds)</label>
+            </div>
+            <!-- Sign in button -->
+            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Create your concert</button>
+        </form>
+        <!-- Form -->
+    </div>
+</div>
+</div>
 
-    {{#each musicianConcerts}}
+<div>
+  <a href="/edit">Edit all of your content</a>
+</div>
+
+
+{{!-- 
+<h1>Create concert</h1>
+<form action="/concert/new" method="POST">
+  <label for="name">Concert Name: </label>
+  <input type="text" name="name" id="name">
+
+  <label for="date">Date</label>
+  <input type="date" name="date" id="date">
+
+  <label for="price">Price</label>
+  <input type="number" name="price" id="price">
+
+
+  <label for="duration">Duration:</label>
+  <input type="text" name="duration" id="duration">
+
+  <button type="submit">Create concert</button>
+</form> --}}
+
+
+
+{{!-- 
+<a href="/concert/new">Create New Concert</a> --}}
+
+
+    {{!-- {{#each musicianConcerts}}
     {{>concertCard this}}
     {{/each}}
 
@@ -190,34 +264,15 @@
         Your browser does not support the audio tag.
       </audio>
     </div>
-    {{/each }}
+    {{/each }} --}}
 
 
 </div>
 
 {{!-- ACÁ VA EL DESMADRE --}}
 
-<script>
-  const $videoInput = document.querySelector('#video')
-  const $videourl = document.querySelector('#videourl')
 
-$videoInput.onchange = async e => {
-  //e.target.files almacena los archivos selecionados
-  console.log(e.target.files[0])
-  
-  const data = new FormData()
-  data.append("file", e.target.files[0]);
-  data.append("upload_preset", "musicApp");
-  const res = await axios.post(
-    /*                        cloudname👇    👇 tipo de recurso     */
-    "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
-    data
-  );
-  $videourl.value = res.data.secure_url
-}
-</script>
 
-<a href="/concert/new">Create New Concert</a>
 
 
 {{!-- <h2>Share your music!</h2>

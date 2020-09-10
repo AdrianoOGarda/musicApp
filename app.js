@@ -91,4 +91,7 @@ app.use('/auth', authRoutes);
 const concertRoutes = require('./routes/concert');
 app.use('/', concertRoutes)
 
+const CRUDroutes = require('./routes/CRUD');
+app.use('/', CRUDroutes)
+
 module.exports = app;

@@ -11,14 +11,13 @@ const {
 } = require("../middlewares/index")
 
 const {
-    concertForm,
     createConcert,
     concertDetail,
     concertPay,
     boughtTicket
 } = require("../controllers/concert")
 
-router.get("/concert/new", concertForm)
+//router.get("/concert/new", concertForm)
 
 router.post("/concert/new", createConcert)
 

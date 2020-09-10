@@ -6,11 +6,7 @@ const musicSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    audiourl: String,
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }]
+    audiourl: String
 }, {
     timestamps: true
 })

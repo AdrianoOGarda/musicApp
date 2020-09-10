@@ -7,11 +7,7 @@ const postSchema = new Schema({
         ref: "User"
     },
     picUrl: String,
-    picName: String,
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: "Comment"
-    }]
+    picName: String
 }, {
     timestamps: true
 })

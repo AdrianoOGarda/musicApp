@@ -1,12 +1,67 @@
-<h1>Welcome to your profile {{username}}</h1>
-<img style="width: 30px" src="{{imageUrl}}" alt="Profile image">
+<div class="container profile-container">
+
+{{!-- NAV --}}
+  <nav style="position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: black;
+    background-color: white;
+    font-weight: 900;
+    box-sizing:border-box;
+    border-bottom: 1px solid black">
+    <div>
+      <a href="/"><img src="/images/logo.svg" alt="Logo"
+          style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+    </div>
+
+
+    <div class="dropdown">
+     <a 
+      data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"
+        style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
+        <img style="height: 30px;" src={{imageUrl}}  alt="user_image">
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/profile">Profile</a>
+        <a class="dropdown-item" style="color: red" href="/auth/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  {{!-- TERMINA NAV --}}
+
+<div class="media"
+    style="display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid black">
+    <img class="mr-3"
+      style="vertical-align: middle; border: 1px solid black; width: 120px; height: 120px; border-radius: 50%;"
+      src="{{imageUrl}}" alt="Profile image">
+    <h1>Welcome to your profile
+      <br />
+      <strong style="text-decoration:underline">{{username}}</strong>
+    </h1>
+  </div>
+
+
 <div>
   {{#each favouriteArtist}}
   {{> artistUserCard this}} 
   {{/each}}
 </div>
+<br>
+<br>
 <div>
   {{#each tickets}}
   {{>concertTickets this}}
   {{/each}}
+</div>
+
 </div>
