@@ -21,7 +21,7 @@ exports.home = async(req, res) => {
     const musicians = await User.find({ role: 'MUSICIAN' })
     const songs = await Music.find()
     const videos = await Video.find()
-    res.render('index', { posts, musicians, songs, videos });
+    res.render('index', { posts, musicians, songs, videos, user: req.user });
 }
 
 exports.createPost = async(req, res) => {
@@ -65,4 +65,8 @@ exports.follow = async(req, res) => {
     const { _id } = await User.findOne({ username: name })
     await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
     res.redirect('/')
+}
+
+exports.landing = async(req, res) => {
+    res.render('landing')
 }

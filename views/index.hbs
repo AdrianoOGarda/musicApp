@@ -1,6 +1,48 @@
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 
+
+<!-- AQUI EMPIEZA NAV -->
+  <nav style="position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: black;
+    background-color: white;
+    font-weight: 900;
+    box-sizing:border-box;
+    border-bottom: 1px solid black">
+    <div>
+      <a href="/"><img src="/images/logo.svg" alt="Logo"
+          style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+    </div>
+
+
+    <div class="dropdown">
+      <a 
+      data-toggle="dropdown" aria-haspopup="true"
+          aria-expanded="false"
+        style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
+        <img style="height: 30px;" src={{user.imageUrl}}  alt="user_image">
+      </a>
+
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="/profile">Profile</a>
+        <a class="dropdown-item" style="color: red" href="/auth/logout">Logout</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- AQUI TERMINA NAV -->
+
+{{user.username}}
+
 {{#each posts}}
 <div>
   <h2>{{picName}}</h2>
@@ -12,7 +54,7 @@
 
 <div>
   {{#each musicians}}
-  {{>artistCard this}}
+  {{> artistCard this}}
   {{/each}}
 </div>
 
