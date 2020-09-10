@@ -18,7 +18,7 @@ const { Video, Data } = new Mux(
 const session = require("express-session");
 const MongoStore = require('connect-mongo')(session);
 const flash = require("connect-flash");
-
+const { setLocals } = require("./middlewares")
 
 mongoose
     .connect('mongodb://localhost/musicapp', { useNewUrlParser: true })
@@ -80,6 +80,18 @@ app.use(session({
 }))
 app.use(flash());
 require('./passport')(app);
+app.use(setLocals(app))
+
+//     (req, res, next) => {
+//     if (req.user) {
+//         app.locals.listener = req.user.role === "USER"
+//         app.locals.musician = req.user.role === "MUSICIAN"
+//     } else {
+//         app.locals.listener = null
+//         app.locals.musician = null
+//     }
+//     next()
+// })
 
 
 const index = require('./routes/index');

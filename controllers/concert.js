@@ -6,7 +6,7 @@ const User = require("../models/User")
 exports.concertForm = (req, res) => { res.render("newConcert") }
 
 exports.createConcert = async(req, res) => {
-    const { band, name, duration, price, date } = req.body
+    const { name, duration, price, date } = req.body
     const { username } = req.user
     const {
         data: {
@@ -25,7 +25,7 @@ exports.createConcert = async(req, res) => {
             }
         }
     )
-    await Concert.create({
+    const newConcert = await Concert.create({
         name,
         duration,
         band: username,
@@ -35,6 +35,8 @@ exports.createConcert = async(req, res) => {
         playbackId: playback_ids[0].id,
         streamId: id
     })
+    const { _id } = newConcert
+    await User.findByIdAndUpdate(req.user._id, { $push: { tickets: _id } }, { new: true })
     res.redirect("/")
 }
 
@@ -43,25 +45,6 @@ exports.concertDetail = (req, res) => {
     const concert = req.body
     res.render("concertDetail", concert)
 }
-
-// exports.concert = async(req, res) => {
-//     console.log(req.body)
-//     console.log(req.user)
-//     const { _id } = req.user
-//     const musicianId = _id
-//         //console.log(_id)
-//     const { date, name, band, price } = req.body
-//     console.log(band)
-//     const concert = await Concert.create({
-//         date,
-//         name,
-//         band,
-//         price,
-//         musicianId
-//     })
-//     console.log(concert)
-//     res.redirect("/profile")
-// }
 
 exports.concertPay = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)

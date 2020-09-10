@@ -27,7 +27,7 @@
       data-toggle="dropdown" aria-haspopup="true"
           aria-expanded="false"
         style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
-        <img style="height: 30px;" src={{userWithPosts.imageUrl}}  alt="user_image">
+        <img style="height: 30px;" src={{imageUrl}}  alt="user_image">
       </a>
 
       <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -43,14 +43,21 @@
     style="display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid black">
     <img class="mr-3"
       style="vertical-align: middle; border: 1px solid black; width: 120px; height: 120px; border-radius: 50%;"
-      src="{{userWithPosts.imageUrl}}" alt="Profile image">
+      src="{{imageUrl}}" alt="Profile image">
     <h1>Welcome to your profile
       <br />
-      <strong style="text-decoration:underline">{{userWithPosts.username}}</strong>
+      <strong style="text-decoration:underline">{{username}}</strong>
     </h1>
   </div>
 
 <div class="formsDiv" style="display:flex; justify-content: space-between;">
+
+{{!-- JERO AGREGO PERFIL PUBLICO --}}
+  <h2>See My Public Profile</h2>
+<form action="/artist-detail" method="post">
+    <input type="text" name="_id" value="{{_id}}" hidden>
+    <button type="submit">Public Profile</button>
+</form>
 
   {{!-- PRIMER FORM --}}
   <div style="width:280px;">
@@ -292,3 +299,26 @@
 
   <br>
   <br> --}}
+
+
+{{!-- 
+{{#each posts}}
+<p>{{content}}</p>
+<img src="{{picUrl}}" alt="foto">
+{{/each}} --}}
+
+{{#each tickets}}
+<p>Concert</p>
+<p>{{name}}</p>
+<p>Fecha: {{date}}</p>
+<p>${{price}}</p>
+<p>Stream Key:</p>
+<p>{{streamKey}}</p>
+<p>Server: rtmps://global-live.mux.com:443/app</p>
+<small>We recommend using OBS</small>
+<form action="/concert-detail" method="post">
+    <input type="text" name="name" value="{{name}}" hidden>
+    <input type="text" name="playbackId" value="{{playbackId}}" hidden>
+    <button type="submit">Go to Concert</button>
+</form>
+{{/each}}

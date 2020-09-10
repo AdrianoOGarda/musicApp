@@ -3,10 +3,12 @@
     <div class="card-body">
       <h5 class="card-title">{{this.name}}</h5>
       <h2>{{band}}</h2>
+      <h3>{{date}}</h3>
       <h3>{{price}}</h3>
-      <form action="/concert-pay/{{this._id}}" method="post">
-      <button type="submit">Buy Ticket</button>
+      {{#if @root.listener}}
+      <form action="/concert-pay/{{_id}}" method="post">
+      <button type="submit">Bought Ticket</button>
       </form>
-
+      {{/if}}
 </div>
 

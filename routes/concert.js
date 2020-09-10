@@ -1,9 +1,7 @@
 const express = require("express")
 const router = express.Router()
-const axios = require("axios")
-const Concert = require("../models/Concert")
 
-const { MUSICIAN, USER } = require("../roles");
+const { USER } = require("../roles");
 
 const {
     ensureLogin,
@@ -20,8 +18,6 @@ const {
 //router.get("/concert/new", concertForm)
 
 router.post("/concert/new", createConcert)
-
-//router.get("/concert/:concertId", concertPay)
 
 router.post('/concert-pay/:concertId', ensureLogin("/auth/login"), checkRole(USER), concertPay);
 
