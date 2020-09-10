@@ -19,7 +19,7 @@ exports.home = async(req, res) => {
     const songs = await Music.find()
     const videos = await Video.find()
     const musicianConcerts = await Concert.find()
-    res.render('index', { posts, musicians, songs, videos, musicianConcerts });
+    res.render('index', { posts, musicians, songs, videos, musicianConcerts, user: req.user });
 }
 
 exports.createPost = async(req, res) => {
@@ -64,4 +64,8 @@ exports.follow = async(req, res) => {
     const { _id } = await User.findOne({ username: name })
     await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
     res.redirect('/')
+}
+
+exports.landing = async(req, res) => {
+    res.render('landing')
 }

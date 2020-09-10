@@ -1,3 +1,4 @@
+{{!-- <div id="allSignup">
 <h2>Signup</h2>
 
 <form action="/auth/signup" method="POST" id="form-container" enctype="multipart/form-data">
@@ -37,3 +38,81 @@
     <a href="/auth/login">Login</a>
   </p>
 </form>
+
+</div> --}}
+
+<div id="particles-foreground" class="vertical-centered-box"></div>
+    <div id="particles-background" class="vertical-centered-box"></div>
+
+
+<div class="landing-container">
+  <div class="nav landing-nav">
+    <div class="col d-flex justify-content-start">
+      <img src="/images/logo.svg" style="width: 150px" alt="">
+    </div>
+    <div class="col d-flex justify-content-end align-items-center">
+      <a class="landing-link">ABOUT</a>
+      <a href="/auth/login" class="landing-link">LOGIN</a>
+    </div>
+  </div>
+
+<link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+
+<body class="signupBody">
+  <div class="container" id="signupContainer">
+    <div class="col-md-6 mx-auto text-center">
+      <div class="header-title">
+        <h1 class="wv-heading--title">
+          Signup — it’s free!
+        </h1>
+        <h2 class="wv-heading--subtitle" style="font-size: 20px; padding-bottom:10px;">
+          The world's first concert streaming app!
+        </h2>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4 mx-auto">
+        <div class="myform form ">
+          <form action="/auth/signup" method="POST" name="signup" enctype="multipart/form-data">
+            <div class="form-group">
+              <input type="text" name="username" class="form-control my-input" id="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" class="form-control my-input" id="email" placeholder="email">
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" class="form-control my-input" id="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+              <label for="imageSignup" class="custom-file-upload" style="width:100%; height:38px; background-color:white; border-radius:.25rem; color:#495057; display: flex; align-items:center; padding-left:12px">Choose profile image</label>
+              <input type="file" name="image" id="imageSignup" class="form-control my-input" placeholder="Your profile image">
+            </div>
+            <select class="custom-select" name='role'>
+              <option selected>User type:</option>
+              <option value="MUSICIAN">Musician / Band</option>
+              <option value="USER">Listener</option>
+            </select>
+            {{#if message }}
+            <div class="error-message">{{ message }}</div>
+            {{/if}}
+            <div class="text-center ">
+              <button type="submit" class=" btn btn-block send-button tx-tfm" style="color:white;">Create Your Free Account</button>
+            </div>
+            <div class="col-md-12 ">
+              <div class="login-or">
+                <hr class="hr-or">
+                <span class="span-or" style="display:flex; justify-content:center;">or</span>
+              </div>
+            </div>
+            <div class="form-group">
+              <a class="btn btn-block g-button" href="/auth/auth/google" style="color:white;">
+                <i class="fa fa-google"></i> Sign up with Google
+              </a>
+            </div>
+            </p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>

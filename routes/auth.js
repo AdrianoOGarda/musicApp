@@ -38,6 +38,11 @@ router.get("/signup", (req, res, next) => {
 });
 
 router.post("/signup", upload.single("image"), (req, res, next) => {
+    console.log('body')
+    console.log(req.body)
+    console.log(req.file)
+
+    const email = req.body.email;
     const role = req.body.role;
     const username = req.body.username;
     const password = req.body.password;
@@ -60,6 +65,7 @@ router.post("/signup", upload.single("image"), (req, res, next) => {
             username,
             password: hashPass,
             imageUrl: path,
+            email,
             role
         });
 
@@ -68,6 +74,8 @@ router.post("/signup", upload.single("image"), (req, res, next) => {
                 res.redirect("/");
             })
             .catch(err => {
+                console.log('!!!!!!!!')
+                console.log(err)
                 res.render("auth/signup", { message: "Something went wrong" });
             })
     });

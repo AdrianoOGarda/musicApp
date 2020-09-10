@@ -19,7 +19,8 @@ const {
     videoPost,
     privateListener,
     follow,
-    home
+    home,
+    landing
 } = require("../controllers/index")
 
 const {
@@ -38,7 +39,7 @@ const {
 // });
 
 
-router.get('/', home);
+router.get('/home', home);
 
 router.get('/profile', ensureLogin("/auth/login"), checkRole(MUSICIAN), private);
 
@@ -56,6 +57,7 @@ router.post('/follow', follow);
 
 
 
+router.get('/', landing)
 
 
 module.exports = router;
