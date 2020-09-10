@@ -11,12 +11,12 @@ const userSchema = new Schema({
     },
     tickets: [{
         type: Schema.Types.ObjectId,
-        ref: "Concert"
+        ref: "User"
     }],
     googleID: String,
     favouriteArtist: [{
         type: Schema.Types.ObjectId,
-        ref: "User"
+        ref: "Concert"
     }],
     role: {
         type: String,

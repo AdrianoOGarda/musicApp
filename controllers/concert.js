@@ -40,29 +40,30 @@ exports.createConcert = async(req, res) => {
 
 
 exports.concertDetail = async(req, res) => {
+    console.log(req.params.concertId)
     const concert = await Concert.findById(req.params.concertId)
     res.render("concertDetail", concert)
 }
 
 
-exports.concert = async(req, res) => {
-    console.log(req.body)
-    console.log(req.user)
-    const { _id } = req.user
-    const musicianId = _id
-        //console.log(_id)
-    const { date, name, band, price } = req.body
-    console.log(band)
-    const concert = await Concert.create({
-        date,
-        name,
-        band,
-        price,
-        musicianId
-    })
-    console.log(concert)
-    res.redirect("/profile")
-}
+// exports.concert = async(req, res) => {
+//     console.log(req.body)
+//     console.log(req.user)
+//     const { _id } = req.user
+//     const musicianId = _id
+//         //console.log(_id)
+//     const { date, name, band, price } = req.body
+//     console.log(band)
+//     const concert = await Concert.create({
+//         date,
+//         name,
+//         band,
+//         price,
+//         musicianId
+//     })
+//     console.log(concert)
+//     res.redirect("/profile")
+// }
 
 exports.concertPay = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)

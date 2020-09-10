@@ -55,6 +55,7 @@ exports.videoPost = async(req, res) => {
 }
 
 exports.privateListener = async(req, res) => {
+    console.log(req.user)
     res.render("listener", req.user)
 }
 

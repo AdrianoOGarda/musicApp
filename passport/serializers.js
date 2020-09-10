@@ -5,14 +5,8 @@ passport.serializeUser((loggedInUser, cb) => {
     cb(null, loggedInUser._id);
 });
 
-passport.deserializeUser((userIdFromSession, cb) => {
-    User.findById(userIdFromSession).populate('favouriteArtist')
-    User.findById(userIdFromSession).populate('tickets')
-        .then(userDocument => {
-            //console.log(userDocument)
-            cb(null, userDocument);
-        })
-        .catch(err => {
-            cb(err);
-        })
-});
+passport.deserializeUser(async(userIdFromSession, cb) => {
+    const userDocument = await User.findById(userIdFromSession).populate("favouriteArtist") //.populate('tickets')
+    console.log(userDocument)
+    cb(null, userDocument);
+})

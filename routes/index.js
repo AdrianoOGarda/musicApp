@@ -49,9 +49,10 @@ router.post('/musicPost', musicPost);
 router.get('/listener', ensureLogin("/login"), checkRole(USER), privateListener);
 
 router.post('/videoPost', videoPost)
+
 router.post('/follow', follow);
 
-router.post('/concert', concert)
+// router.post('/concert', concert)
 
 router.get('/concert-pay/:concertId', concertPay);
 
