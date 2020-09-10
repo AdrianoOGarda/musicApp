@@ -17,6 +17,6 @@ router.post("/concert/new", createConcert)
 
 router.get("/concert/:concertId", concertPay)
 
-router.post("/bought-ticket", boughtTicket)
+router.post("/bought-ticket/:concertId", boughtTicket)
 
 module.exports = router;

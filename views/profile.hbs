@@ -1,5 +1,5 @@
 <h1>Welcome to your profile {{userWithPosts.username}}</h1>
-<img style="width: 30px" src="{{imageUrl}}" alt="Profile image">
+<img style="width: 30px" src="{{userWithPosts.imageUrl}}" alt="Profile image">
 
 <h2>Share your music!</h2>
 <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
@@ -78,17 +78,7 @@ $videoInput.onchange = async e => {
 }
 </script>
 
-
-<form action="/concert" method="post">
-<label for="name">Concert Name</label>
-<input type="text" id="name" name="name">
-<label for="date">Date</label>
-<input type="date" name="date" id="date">
-<label for="price">Price</label>
-<input type="number" name="price" id="price">
-<input type="band" id="band" name="band" value="{{userWithPosts.username}}" hidden>
-<button type="submit">Post Concert</button>
-</form>
+<a href="/concert/new">Create New Concert</a>
 
 {{#each musicianConcerts}}
 {{>concertCard this}}

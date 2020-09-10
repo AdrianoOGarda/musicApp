@@ -10,7 +10,6 @@ exports.private = async(req, res) => {
     })
     const { username } = req.user
     const musicianConcerts = await Concert.find({ band: username })
-    console.log(musicianConcerts)
     res.render("profile", { userWithPosts, musicianConcerts })
 }
 

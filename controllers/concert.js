@@ -1,12 +1,13 @@
 const axios = require("axios")
 const Concert = require("../models/Concert")
 const mercadoPago = require('../configs/mercadoPago')
+const User = require("../models/User")
 
 exports.concertForm = (req, res) => { res.render("newConcert") }
 
 exports.createConcert = async(req, res) => {
-    const { band, name, duration } = req.body
-        // 2.Generar un nuevo liveStream en Mux
+    const { band, name, duration, price, date } = req.body
+    const { username } = req.user
     const {
         data: {
             data: { stream_key, playback_ids, id }
@@ -27,7 +28,9 @@ exports.createConcert = async(req, res) => {
     await Concert.create({
         name,
         duration,
-        band,
+        band: username,
+        date,
+        price,
         streamKey: stream_key,
         playbackId: playback_ids[0].id,
         streamId: id
@@ -36,13 +39,12 @@ exports.createConcert = async(req, res) => {
 }
 
 
-//3. Ver el concierto
 exports.concertDetail = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)
     res.render("concertDetail", concert)
 }
 
-//
+
 exports.concert = async(req, res) => {
     console.log(req.body)
     console.log(req.user)
@@ -65,7 +67,7 @@ exports.concert = async(req, res) => {
 exports.concertPay = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)
         //console.log(concert)
-    const { name, band, price } = concert
+    const { name, band, price, _id } = concert
     const preference = {
         items: [{
             title: `Ticket Concert: ${name} | Musician: ${band}`,
@@ -79,6 +81,8 @@ exports.concertPay = async(req, res) => {
     res.render("concertPay", concert)
 }
 
-exports.boughtTicket = (req, res) => {
+exports.boughtTicket = async(req, res) => {
+    const { concertId } = req.params
+    await User.findByIdAndUpdate(req.user._id, { $push: { tickets: concertId } }, { new: true })
     res.render("boughtTicket")
 }

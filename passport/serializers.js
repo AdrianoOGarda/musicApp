@@ -7,6 +7,7 @@ passport.serializeUser((loggedInUser, cb) => {
 
 passport.deserializeUser((userIdFromSession, cb) => {
     User.findById(userIdFromSession).populate('favouriteArtist')
+    User.findById(userIdFromSession).populate('tickets')
         .then(userDocument => {
             //console.log(userDocument)
             cb(null, userDocument);

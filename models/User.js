@@ -9,6 +9,10 @@ const userSchema = new Schema({
         type: String,
         unique: true
     },
+    tickets: [{
+        type: Schema.Types.ObjectId,
+        ref: "Concert"
+    }],
     googleID: String,
     favouriteArtist: [{
         type: Schema.Types.ObjectId,
