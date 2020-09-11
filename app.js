@@ -21,7 +21,7 @@ const flash = require("connect-flash");
 const { setLocals } = require("./middlewares")
 
 mongoose
-    .connect(process.env.DB, { useNewUrlParser: true })
+    .connect('mongodb://localhost/musicapp', { useNewUrlParser: true })
     .then(x => {
         console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
     })
