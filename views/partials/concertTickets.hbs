@@ -1,28 +1,46 @@
-{{!-- <div>
-  <div class="card">
-    <div class="card-body">
-      <h3>Cocierto Comprado</h2>
-      <h2 class="card-title">{{this.name}}</h2>
-      <h3>{{band}}</h2>
-      <form action="/concert-detail" method="post">
-      <input type="text" name="streamKey" value="{{streamKey}}" hidden>
-      <input type="text" name="name" value="{{name}}" hidden>
-      <input type="text" name="playbackId" value="{{playbackId}}" hidden>
-      <button type="submit">Go to Concert</button>
-      </form>
-</div> --}}
 
-<div class="p-3 mb-2 bg-success text-white"style="max-width: 18rem;">
-  <div class="card-header">Bought ticket 
-     <img style="width: 50px"  src="{{this.imageUrl}}" alt="{{this.username}}"/>
-  </div>
-  <div class="card-body">
-    <h5 class="card-title">{{this.name}}</h5>
-    <h5 class="card-title">{{band}}</h5>
-   <form action="/concert-detail" method="post">
+
+<div style="display: flex; align-items: center; justify-content:center;">
+<section class="container" style="width: 900px;
+  margin: 10px">
+  <div class="row" style="overflow: hidden">
+    <article class="card fl-left" style="float: left; display: table-row;
+  width: 49%;
+  background-color: #fff;
+  color: #000000;
+  margin-bottom: 10px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  border-radius: 4px;
+  position: relative">
+      <section class="card-cont" style="display: table-cell;
+  width: 800px;
+  font-size: 85%;
+  padding: 10px 10px 30px 50px">
+        <small>{{band}}</small>
+        <h3 style="color: #3C3C3C;
+  font-size: 130%">{{this.name}}</h3>
+        <div class="even-date">
+         <i class="fa fa-calendar"></i>
+         <time>
+           <span>{{this.date}}</span>
+         </time>
+        </div>
+        <div class="even-info">
+          <i class="fa fa-map-marker"></i>
+          <p>
+            ${{this.price}}.00 MXN
+          </p>
+        </div>
+         <form action="/concert-detail" method="post">
       <input type="text" name="streamKey" value="{{streamKey}}" hidden>
       <input type="text" name="name" value="{{name}}" hidden>
       <input type="text" name="playbackId" value="{{playbackId}}" hidden>
       <button type="submit">Go to Concert</button>
       </form>
-      </div>
+      </section>
+    </article>
+  </div>
+</section>
+</div>
+

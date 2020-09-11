@@ -21,21 +21,6 @@ const {
     artistDetail
 } = require("../controllers/index")
 
-const {
-    concert,
-    concertPay
-} = require('../controllers/concert')
-
-
-/* GET home page */
-// router.get('/', async(req, res, next) => {
-//     const posts = await Post.find()
-//     const musicians = await User.find({ role: 'MUSICIAN' })
-//     const songs = await Music.find()
-//     const videos = await Video.find()
-//     res.render('index', { posts, musicians, songs, videos });
-// });
-
 
 router.get('/home', home);
 

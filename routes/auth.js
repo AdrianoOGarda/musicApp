@@ -10,7 +10,6 @@ const {
     googleRedirect
 } = require("../controllers/googleStrategy")
 
-// Bcrypt to encrypt passwords
 const bcrypt = require("bcrypt");
 const bcryptSalt = 10;
 
@@ -86,7 +85,6 @@ router.get("/logout", (req, res) => {
     res.redirect("/");
 });
 
-//SOCIAL
 router.get("/auth/google", googleProcess)
 router.get("/auth/google/callback", googleRedirect)
 

@@ -7,6 +7,5 @@ passport.serializeUser((loggedInUser, cb) => {
 
 passport.deserializeUser(async(userIdFromSession, cb) => {
     const userDocument = await User.findById(userIdFromSession).populate('tickets').populate("favouriteArtist").populate("posts").populate("songs").populate("videos")
-        //console.log(userDocument)
     cb(null, userDocument);
 })

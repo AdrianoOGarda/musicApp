@@ -1,4 +1,33 @@
+<nav style="position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: black;
+    background-color: white;
+    font-weight: 900;
+    box-sizing:border-box;
+    border-bottom: 1px solid black; z-index: 999">
+  <div>
+    <a href="/home"><img src="/images/logo.svg" alt="Logo" style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+  </div>
 
+<div>
+  {{#if listener}}
+  <a href="/listener" style="color:black">Listener</a>
+  {{/if}}
+  {{#if musician}}
+  <a href="/profile" style="color:black">Musician</a>
+  {{/if}}
+  <a href="/auth/logout" style="color:black">Logout</a>
+</div>
+
+</nav>
 
 <div id="particles-foreground" class="vertical-centered-box"></div>
 <div id="particles-background" class="vertical-centered-box"></div>

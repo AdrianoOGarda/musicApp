@@ -1,8 +1,7 @@
 var i = 0;
 var j = 0;
-var txt = `Wouldn't you like to watch your favorite musicians live from home?`; /* The text */
-var txt2 = 'We got you'
-var speed = 20; /* The speed/duration of the effect in milliseconds */
+var txt = `Wouldn't you like to watch your favorite musicians live from home?`;
+var speed = 20;
 
 function typeWriter1() {
     if (i < txt.length) {
