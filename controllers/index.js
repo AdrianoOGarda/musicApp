@@ -64,7 +64,7 @@ exports.follow = async(req, res) => {
     const { name } = req.body
     const { _id } = await User.findOne({ username: name })
     await User.findByIdAndUpdate(req.user._id, { $push: { favouriteArtist: _id } }, { new: true })
-    res.redirect('/')
+    res.redirect('/listener')
 }
 
 exports.landing = async(req, res) => {

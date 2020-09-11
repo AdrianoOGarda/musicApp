@@ -87,6 +87,13 @@
                 <p class="card-text">{{username}}</p>
                 <p class="card-text">{{content}}</p>
               </div>
+              {{#if @root.musician}}
+              <form class="row justify-content-center" action="/delete-picture/{{_id}}" method="post">
+                <input type="text" name="_id" value="{{_id}}" hidden>
+                <button class="btn btn-primary pl-5 pr-5" type="submit">Delete Picture</button>
+              </form>
+              <br>
+              {{/if}}
             </div>
           </div>
           {{/each}}
@@ -108,8 +115,14 @@
                 </audio>
                 <hr>
                 <p class="card-text">{{content}}</p>
-                <p class="card-text"><strong>by:</strong>{{username}}</p>
               </div>
+              {{#if @root.musician}}
+              <form class="row justify-content-center" action="/delete-song/{{_id}}" method="post">
+                <input type="text" name="_id" value="{{_id}}" hidden>
+                <button class="btn btn-primary pl-5 pr-5" type="submit">Delete Song</button>
+                </form>
+                <br>
+                {{/if}}
             </div>
           </div>
           {{/each}}
@@ -130,8 +143,14 @@
                   <source src="{{this.videourl}}" type="video/ogg">
                   Your browser does not support the video tag.
                 </video>
-                <p class="card-text"><strong>by:</strong>{{this.creatorId.username}}</p>
               </div>
+              {{#if @root.musician}}
+              <form class="row justify-content-center" action="/delete-video/{{_id}}" method="post">
+                <input type="text" name="_id" value="{{_id}}" hidden>
+                <button class="btn btn-primary pl-5 pr-5" type="submit">Delete Video</button>
+                </form>
+                <br>
+                {{/if}}
             </div>
           </div>
           {{/each}}

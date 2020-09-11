@@ -66,5 +66,5 @@ exports.concertPay = async(req, res) => {
 exports.boughtTicket = async(req, res) => {
     const { concertId } = req.params
     await User.findByIdAndUpdate(req.user._id, { $push: { tickets: concertId } }, { new: true })
-    res.render("boughtTicket")
+    res.redirect("/listener")
 }

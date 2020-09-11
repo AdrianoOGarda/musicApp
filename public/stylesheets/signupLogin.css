@@ -1,11 +1,11 @@
 #signupContainer {
     padding-top: 100px;
-    font-family: Menlo;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #loginContainer {
     padding-top: 170px;
-    font-family: Menlo;
+    font-family: 'Roboto Mono', monospace;
 }
 
 #imageSignup {

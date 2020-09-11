@@ -2,7 +2,7 @@
     color: white;
     background-color: black;
     height: 100vh;
-    font-family: Menlo;
+    font-family: 'Roboto Mono', monospace;
 }
 
 .vertical-centered-box {

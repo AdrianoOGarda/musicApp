@@ -49,9 +49,8 @@ router.get('/listener', ensureLogin("/auth/login"), checkRole(USER), privateList
 
 router.post('/videoPost', videoPost)
 
-// router.post('/concert', concert)
-
 router.get('/', landing)
+
 router.post('/follow', ensureLogin("/auth/login"), checkRole(USER), follow);
 
 router.post("/artist-detail", artistDetail)

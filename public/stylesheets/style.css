@@ -1,18 +1,9 @@
 body {
   padding: 0;
   margin: 0;
-  font-family: Menlo; }
+  font-family: 'Roboto Mono', monospace; }
 
 a {
   color: white; }
-
-.months-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr; }
-
-.calendar-header > table {
-  display: flex;
-  justify-content: space-around;
-  font-size: 22px; }
 
 /*# sourceMappingURL=style.css.map */
