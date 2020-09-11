@@ -1,6 +1,7 @@
 var i = 0;
 var j = 0;
 var txt = `Wouldn't you like to watch your favorite musicians live from home?`;
+var txt2 = 'We got you';
 var speed = 20;
 
 function typeWriter1() {
