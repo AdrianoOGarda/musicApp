@@ -9,9 +9,9 @@
       </form>
 </div> --}}
 
-<div class="card bg-dark mb-3 col" style="max-width: 18rem;">
+<div class="card bg-light mb-3 col" style="max-width: 18rem;">
   <div style="display:flex;">
-    <div style="padding-top:25px; padding-left:5px; color:white">
+    <div style="padding-top:25px; padding-left:5px; color:black">
   {{this.username}}
   </div>
   <div class="card-header" style="color:white; border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border: 1px solid black; margin:5px;">
@@ -21,7 +21,7 @@
   <div class="card-body">
    <form action="/artist-detail" method="post">
       <input type="text" name="_id" value="{{this._id}}" hidden>
-      <button type="submit" class="btn btn-outline-warning"><h5 class="card-title">See more</h5></button>
+      <button type="submit" class="btn btn-info"><h5 class="card-title">See more</h5></button>
       </form>
 </div>
 </div>

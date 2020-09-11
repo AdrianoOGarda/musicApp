@@ -1,4 +1,4 @@
-<h1>{{name}}</h1>
+{{!-- <h1>{{name}}</h1>
 <h2>{{band}}</h2>
 <h3>{{date}}</h3>
 <h3>{{price}}</h3>
@@ -8,4 +8,51 @@
     src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
     data-preference-id='{{preferenceId}}'>
   </script>
+</form> --}}
+
+<div id="particles-foreground2" class="vertical-centered-box2"></div>
+<div id="particles-background2" class="vertical-centered-box2"></div>
+
+
+  <div style="display: flex; align-items: center; justify-content:center;">
+<section class="container" style="width: 90%;
+  margin: 100px auto">
+  <div class="row" style="overflow: hidden">
+    <article class="card fl-left" style="float: left; display: table-row;
+  width: 49%;
+  background-color: #fff;
+  color: #000000;
+  margin-bottom: 10px;
+  font-family: 'Oswald', sans-serif;
+  text-transform: uppercase;
+  border-radius: 4px;
+  position: relative">
+      <section class="card-cont" style="display: table-cell;
+  width: 800px;
+  font-size: 85%;
+  padding: 10px 10px 30px 50px">
+        <small>{{band}}</small>
+        <h3 style="color: #3C3C3C;
+  font-size: 130%">{{name}}</h3>
+        <div class="even-date">
+         <i class="fa fa-calendar"></i>
+         <time>
+           <span>{{date}}</span>
+         </time>
+        </div>
+        <div class="even-info">
+          <i class="fa fa-map-marker"></i>
+          <p>
+            ${{price}}.00 MXN
+          </p>
+        </div>
+         <form method="POST" action="/bought-ticket/{{_id}}">
+  <script
+    src="https://www.mercadopago.com.mx/integrations/v1/web-payment-checkout.js"
+    data-preference-id='{{preferenceId}}'>
+  </script>
 </form>
+      </section>
+    </article>
+  </div>
+</div>
