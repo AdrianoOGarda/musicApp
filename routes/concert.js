@@ -22,6 +22,6 @@ router.post('/concert-pay/:concertId', ensureLogin("/auth/login"), checkRole(USE
 
 router.post("/bought-ticket/:concertId", catchErrors(boughtTicket))
 
-router.post("/concert-detail", catchErrors(concertDetail))
+router.post("/concert-detail", concertDetail)
 
 module.exports = router;
