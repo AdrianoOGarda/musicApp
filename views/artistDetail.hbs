@@ -1,34 +1,260 @@
-<h1>{{username}}</h1>
-<img src="{{imageUrl}}" alt="Profile Pic">
+<div id="particles-foreground2" class="vertical-centered-box2"></div>
+<div id="particles-background2" class="vertical-centered-box2"></div>
 
-{{#each tickets}}
-{{>concertCard this}}
-{{/each}}
+<!-- AQUI EMPIEZA NAV -->
+<nav style="position: fixed;
+    top: 0;
+    width: 100%;
+    left: 0;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    padding-right: 50px;
+    color: black;
+    background-color: white;
+    font-weight: 900;
+    box-sizing:border-box;
+    border-bottom: 1px solid black; z-index: 999">
+  <div>
+    <a href="/home"><img src="/images/logo.svg" alt="Logo"
+        style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+  </div>
 
-{{#each posts}}
-<div>
-  <h2>{{picName}}</h2>
-  <img src="{{picUrl}}" alt="{{picName}}" style="width:200px;height:200px;object-fit:cover">
-  <p>{{content}}</p>
+
+  <div class="dropdown">
+    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+      style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
+      <img style="height: 30px;" src={{imageUrl}} alt="user_image">
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/profile">Profile</a>
+      <a class="dropdown-item" style="color: red" href="/auth/logout">Logout</a>
+    </div>
+  </div>
+</nav>
+
+<!-- AQUI TERMINA NAV -->
+
+
+
+<div class="container profile-container">
+  <div class="row justify-content-center">
+    <div
+      style="border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 200px; height: 200px; border: 1px solid black">
+      <img src="{{imageUrl}}" alt="Profile image">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h1>{{username}}</h1>
+  </div>
+
+  <div class="row justify-content-center">
+
+    {{!-- JERO AGREGO PERFIL PUBLICO --}}
+    <br>
+  </div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+        aria-selected="true">Posts</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="false">Concerts</a>
+    </li>
+  </ul>
+
+
+
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div>
+        <div class="row mt-3">
+          <h3>Newest pictures</h3>
+        </div>
+        <div class="row mb-3">
+          {{#each posts}}
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <img src="{{picUrl}}" class="card-img-top" alt="...">
+                <hr>
+                <h5 class="card-title">{{picName}}</h5>
+                <p class="card-text">{{username}}</p>
+                <p class="card-text">{{content}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <hr>
+
+        <div class="row mb-3">
+          <h3>Newest songs</h3>
+        </div>
+        <div class="row mb-3">
+          {{#each songs}}
+          <div class="col-lg-4  mb-3">
+            <div class="card">
+              <div class="card-body">
+                <audio controls>
+                  <source src="{{this.audiourl}}" type="audio/wav">
+                  <source src="{{this.audiourl}}" type="audio/mpeg">
+                  Your browser does not support the audio tag.
+                </audio>
+                <hr>
+                <p class="card-text">{{content}}</p>
+                <p class="card-text"><strong>by:</strong>{{username}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+        <hr>
+
+
+        <div class="row mb-3">
+          <h3>Newest music videos</h3>
+        </div>
+        <div>
+          {{#each videos}}
+          <div class="col-lg-4 mb-3">
+            <div class="card">
+              <div class="card-body">
+                <video width="100%" controls>
+                  <source src="{{this.videourl}}" type="video/mp4">
+                  <source src="{{this.videourl}}" type="video/ogg">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="card-text"><strong>by:</strong>{{this.creatorId.username}}</p>
+              </div>
+            </div>
+          </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+      <div class="row">
+        {{#each tickets}}
+        <div class="col-lg-4 mt-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{this.name}}</h5>
+              <p class="card-text"><strong>Date:</strong>{{date}}</p>
+              <p class="card-text"><strong>Price:</strong>${{price}}.00 MXN</p>
+              {{#if @root.listener}}
+              <form action="/concert-pay/{{_id}}" method="post">
+                <button class="btn btn-primary" type="submit">Buy Ticket</button>
+              </form>
+              {{/if}}
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!--
+  <div class="tab-content" id="myTabContent">
+
+
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="row mt-3">
+        <h3>Newest pictures</h3>
+      </div>
+      <div class="row mb-3">
+        {{#each posts}}
+        <div class="col-lg-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+              <img src="{{picUrl}}" class="card-img-top" alt="...">
+              <hr>
+              <h5 class="card-title">{{picName}}</h5>
+              <p class="card-text">{{username}}</p>
+              <p class="card-text">{{content}}</p>
+            </div>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <hr>
+
+    <div class="row mb-3">
+      <h3>Newest songs</h3>
+    </div>
+    <div class="row mb-3">
+      {{#each songs}}
+      <div class="col-lg-4  mb-3">
+        <div class="card">
+          <div class="card-body">
+            <audio controls>
+              <source src="{{this.audiourl}}" type="audio/wav">
+              <source src="{{this.audiourl}}" type="audio/mpeg">
+              Your browser does not support the audio tag.
+            </audio>
+            <hr>
+            <p class="card-text">{{content}}</p>
+            <p class="card-text"><strong>by:</strong>{{username}}</p>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+    <hr>
+
+
+    <div class="row mb-3">
+      <h3>Newest music videos</h3>
+    </div>
+    <div>
+      {{#each videos}}
+      <div class="col-lg-4 mb-3">
+        <div class="card">
+          <div class="card-body">
+            <video width="100%" controls>
+              <source src="{{this.videourl}}" type="video/mp4">
+              <source src="{{this.videourl}}" type="video/ogg">
+              Your browser does not support the video tag.
+            </video>
+            <p class="card-text"><strong>by:</strong>{{this.creatorId.username}}</p>
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+    <div class="row">
+      {{#each tickets}}
+      <div class="col-lg-4 mt-3">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">{{this.name}}</h5>
+            <p class="card-text"><strong>Date:</strong>{{date}}</p>
+            <p class="card-text"><strong>Price:</strong>${{price}}.00 MXN</p>
+            {{#if @root.listener}}
+            <form action="/concert-pay/{{_id}}" method="post">
+              <button class="btn btn-primary" type="submit">Buy Ticket</button>
+            </form>
+            {{/if}}
+          </div>
+        </div>
+      </div>
+      {{/each}}
+    </div>
+  </div>
+</div>-->
+
+
+
 </div>
-{{/each}}
-
-{{#each songs}}
-<div>
-<audio controls>
-  <source src="{{this.audiourl}}" type="audio/wav">
-  <source src="{{this.audiourl}}" type="audio/mpeg">
-  Your browser does not support the audio tag.
-</audio>
-</div>
-{{/each}}
-
-{{#each videos}}
-<div>
-  <video width="320" height="240" controls>
-  <source src="{{this.videourl}}" type="video/mp4">
-  <source src="{{this.videourl}}" type="video/ogg">
-  Your browser does not support the video tag.
-</video>
-</div>
-{{/each}}

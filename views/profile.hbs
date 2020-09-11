@@ -1,7 +1,8 @@
-<div class="container profile-container">
+<div id="particles-foreground2" class="vertical-centered-box2"></div>
+<div id="particles-background2" class="vertical-centered-box2"></div>
 
 <!-- AQUI EMPIEZA NAV -->
-  <nav style="position: fixed;
+<nav style="position: fixed;
     top: 0;
     width: 100%;
     left: 0;
@@ -15,93 +16,271 @@
     background-color: white;
     font-weight: 900;
     box-sizing:border-box;
-    border-bottom: 1px solid black">
-    <div>
-      <a href="/"><img src="/images/logo.svg" alt="Logo"
-          style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+    border-bottom: 1px solid black; z-index: 999">
+  <div>
+    <a href="/home"><img src="/images/logo.svg" alt="Logo" style="width: 100px; margin-top: 6px; filter: brightness(0)"></a>
+  </div>
+
+
+  <div class="dropdown">
+    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+      style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
+      <img style="height: 30px;" src={{imageUrl}} alt="user_image">
+    </a>
+
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      <a class="dropdown-item" href="/profile">Profile</a>
+      <a class="dropdown-item" style="color: red" href="/auth/logout">Logout</a>
     </div>
+  </div>
+</nav>
+
+<!-- AQUI TERMINA NAV -->
 
 
-    <div class="dropdown">
-     <a 
-      data-toggle="dropdown" aria-haspopup="true"
-          aria-expanded="false"
-        style="cursor: pointer; width: 36px; height: 36px; border-radius: 50%; border: 0.5px solid black;overflow: hidden; background-color:white; display:flex; justify-content:center; align-items:center">
-        <img style="height: 30px;" src={{imageUrl}}  alt="user_image">
-      </a>
 
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-        <a class="dropdown-item" href="/profile">Profile</a>
-        <a class="dropdown-item" style="color: red" href="/auth/logout">Logout</a>
+<div class="container profile-container">
+  <div class="row">
+    <p>Welcome to your profile!</p>
+  </div>
+  <div class="row justify-content-center">
+    <div
+      style="border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 200px; height: 200px; border: 1px solid black">
+      <img src="{{imageUrl}}" alt="Profile image">
+    </div>
+  </div>
+  <div class="row justify-content-center">
+    <h1>{{username}}</h1>
+  </div>
+
+  <div class="row justify-content-center">
+
+    {{!-- JERO AGREGO PERFIL PUBLICO --}}
+    <form action="/artist-detail" method="post">
+      <input type="text" name="_id" value="{{_id}}" hidden>
+      <button class="btn btn-link" type="submit">See Public Profile</button>
+    </form>
+    <br>
+    <br>
+  </div>
+
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
+        aria-selected="true">Share</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
+        aria-selected="false">Concerts</a>
+    </li>
+  </ul>
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+      <div class="row">
+
+        <div class="col-lg-4">
+          <div class="card mt-3">
+            <div class="card-body">
+              <h5 class="card-title">Share a song</h5>
+              <form action="/musicPost" method="POST">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="input-content" name="content" placeholder="Title" />
+                  <small id="textHelp" class="form-text text-muted">Your song's title</small>
+                </div>
+                <div class="custom-file">
+                  <input type="file" name="audio" id="audio" class="custom-file-input" />
+                  <label class="custom-file-label" for="audio">Choose file</label>
+                </div>
+                <div class="form-group" style="width:280px; display: none">
+                  <input class="form-control" type="text" id="audiourl" name="audiourl">
+                </div>
+                <button class="btn btn-primary form-control mt-5" type="submit" class="btn btn-primary">Upload your
+                  song!</button>
+              </form>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="col-lg-4">
+          <div class="card mt-3">
+            <div class="card-body">
+              <h5 class="card-title">Share a photo</h5>
+              <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
+                <div class="form-group">
+                  <input class="form-control" type="text" name="picName" id="picName" placeholder="Title">
+                  <small id="textHelp" class="form-text text-muted">Your pic's title</small>
+                </div>
+                <div class="form-group">
+                  <textarea class="form-control" type="text" id="input-content" name="content"
+                    placeholder="Description"></textarea>
+                  <small id="textHelp" class="form-text text-muted">Speak your mind</small>
+                </div>
+
+                <div class="custom-file">
+                  <input type="file" name="picUrl" id="image-input" class="custom-file-input" />
+                  <label class="custom-file-label" for="image-input">Choose picture</label>
+                </div>
+
+                <button class="btn btn-primary form-control mt-5" type="submit" class="btn btn-primary">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="col-lg-4">
+          <div class="card mt-3">
+            <div class="card-body">
+
+              <h5 class="card-title">Share a music video</h5>
+              <form action="/videoPost" method="POST">
+                <div class="form-group">
+                  <input class="form-control" type="text" id="input-content" name="content" placeholder="Title" />
+                  <small id="textHelp" class="form-text text-muted">Your videos's title</small>
+                </div>
+
+                <div class="custom-file">
+                  <input type="file" name="video" id="video" class="custom-file-input">
+                  <input type="text" id="videourl" name="videourl" style="display:none">
+                  <label class="custom-file-label" for="video">Choose video</label>
+                </div>
+
+                <button class="btn btn-primary form-control mt-5" type="submit">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
-  </nav>
+    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
 
-  <!-- AQUI TERMINA NAV -->
-
-  <div class="media"
-    style="display: flex; align-items: center; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid black">
-    <img class="mr-3"
-      style="vertical-align: middle; border: 1px solid black; width: 120px; height: 120px; border-radius: 50%;"
-      src="{{imageUrl}}" alt="Profile image">
-    <h1>Welcome to your profile
-      <br />
-      <strong style="text-decoration:underline">{{username}}</strong>
-    </h1>
-  </div>
-
-  {{!-- JERO AGREGO PERFIL PUBLICO --}}
-  <h2>See My Public Profile</h2>
-<form action="/artist-detail" method="post">
-    <input type="text" name="_id" value="{{_id}}" hidden>
-    <button type="submit">Public Profile</button>
-</form>
-<br>
-<br>
-
-<div class="formsDiv" style="display:flex; justify-content: space-between;">
-
-  {{!-- PRIMER FORM --}}
-  <div style="width:280px;">
-  <h2 style="font-size: 20px">Share a photo</h2>
- <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
-  <div class="form-group">
-    <input type="text" id="input-content" name="content" placeholder="Body">
-    <small id="textHelp" class="form-text text-muted">Speak your mind</small>
-  </div>
-  <div class="form-group">
-    <input type="text" name="picName" id="picName" placeholder="Your pic's title">
-  </div>
-  <div class="form-group">
-    <input type="file" name="picUrl" id="image-input" class="form-control-file" />
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-</div>
-
-   
+      {{!-- FORM PARA CONCIERTOS  --}}
+      <div id="concertForm" style="padding-top: 35px; padding-bottom: 25px;">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Create a concert!
+            </h5>
+            <!--Card content-->
+            <!-- Form -->
+            <form action="/concert/new" method="POST" style="color: #757575;" action="#!">
+              <p>Set up your concert by filling the form below</p>
+              <hr />
+              <!-- Name -->
+              <div class="form-group">
+                <label for="name">Your concert's title</label>
+                <input type="text" name="name" id="name" class="form-control" placeholder="Title">
+              </div>
+              <!-- Date -->
+              <div class="form-group">
+                <label for="date">When is it?</label>
+                <input type="date" name="date" id="date" class="form-control" placeholder="Title">
+              </div>
+              {{!-- PRICE --}}
+              <div class="form-group">
+                <label for="price">How much is it going to cost?</label>
+                <input type="number" name="price" id="price" class="form-control" placeholder="Price">
+              </div>
+              {{!-- DURATION --}}
+              <div class="form-group">
+                <label for="duration">How long is it going to be?</label>
+                <input type="text" name="duration" id="duration" class="form-control"
+                  placeholder="Duration (in seconds)">
+              </div>
+              <!-- Sign in button -->
+              <div class="row justify-content-center">
+                <button class="btn btn-primary mt-4 pl-5 pr-5" type="submit">Create your concert!</button>
+              </div>
+            </form>
+            <!-- Form -->
+          </div>
+        </div>
+      </div>
 
 
-    {{!-- SEGUNDO FROM --}}
+
+      <div class="row justify-content-center">
+        <h5>Your Concerts</h5>
+      </div>
+      <div class="row">
+        {{#each tickets}}
+        <div class="col col-lg-4">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title">{{name}}</h5>
+              <strong class="card-text">Date:</strong>
+              <p class="card-text">{{date}}</p>
+              <strong class="card-text">Price:</strong>
+              <p class="card-text">${{price}}</p>
+              <strong class="card-text">Stream Key:</strong>
+              <p class="card-text">{{streamKey}}</p>
+              <strong class="card-text">Server:</strong>
+              <p class="card-text">rtmps://global-live.mux.com:443/app</p>
+              <form class="row justify-content-center" action="/concert-detail" method="post">
+                <input type="text" name="name" value="{{name}}" hidden>
+                <input type="text" name="playbackId" value="{{playbackId}}" hidden>
+                <button class="btn btn-primary pl-5 pr-5" type="submit">Go to Concert</button>
+              </form>
+              <br>
+              <form class="row justify-content-center" action="/delete-concert/{{_id}}" method="post">
+                <input type="text" name="_id" value="{{_id}}" hidden>
+                <button class="btn btn-primary pl-5 pr-5" type="submit">Delete Concert</button>
+              </form>
+            </div>
+                <small class="row justify-content-center card-text mb-2">We recommend using OBS</small>
+          </div>
+        </div>
+        {{/each}}
+      </div>
+
+
+
+
+
+      <div class="formsDiv" style="display:flex; justify-content: space-between;">
+
+        {{!-- PRIMER FORM
+    <div style="width:280px;">
+      <h2 style="font-size: 20px">Share a photo</h2>
+      <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
+        <div class="form-group">
+          <input type="text" id="input-content" name="content" placeholder="Body">
+          <small id="textHelp" class="form-text text-muted">Speak your mind</small>
+        </div>
+        <div class="form-group">
+          <input type="text" name="picName" id="picName" placeholder="Your pic's title">
+        </div>
+        <div class="form-group">
+          <input type="file" name="picUrl" id="image-input" class="form-control-file" />
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div> --}}
+
+
+
+
+        {{!-- SEGUNDO FROM 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
 
-<div>
- <h2 style="font-size: 20px">Share a song</h2>
- <form action="/musicPost" method="POST">
-  <div class="form-group" style="width:280px;">
-    <input type="text" id="input-content" name="content" placeholder="Your song's title" />
-  </div>
-  <div class="form-group" style="width:280px;">
-    <input type="file" name="audio" id="audio" style="width:280px;"> <input type="text" id="audiourl" name="audiourl" hidden>
-  </div>
-  <button type="submit" class="btn btn-primary">Upload your song!</button>
-</form>
-</div>
+    <div>
+      <h2 style="font-size: 20px">Share a song</h2>
+      <form action="/musicPost" method="POST">
+        <div class="form-group" style="width:280px;">
+          <input type="text" id="input-content" name="content" placeholder="Your song's title" />
+        </div>
+        <div class="form-group" style="width:280px;">
+          <input type="file" name="audio" id="audio" style="width:280px;"> <input type="text" id="audiourl"
+            name="audiourl">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload your song!</button>
+      </form>
+    </div>--}}
 
-    
 
 
-    {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
+
+        {{!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.20.0/axios.min.js"></script>
     <form action="/musicPost" method="POST">
       <label for="content">Content:</label>
       <input type="text" id="input-content" name="content" placeholder="Your post content" />
@@ -110,42 +289,43 @@
       <button type="submit">Submit your music post</button>
     </form> --}}
 
-    <script>
-      const $audioInput = document.querySelector('#audio')
-      const $audiourl = document.querySelector('#audiourl')
+        <script>
+          const $audioInput = document.querySelector('#audio')
+          const $audiourl = document.querySelector('#audiourl')
 
-      $audioInput.onchange = async e => {
-        //e.target.files almacena los archivos selecionados
-        console.log(e.target.files[0])
+          $audioInput.onchange = async e => {
+            //e.target.files almacena los archivos selecionados
+            console.log(e.target.files[0])
 
-        const data = new FormData()
-        data.append("file", e.target.files[0]);
-        data.append("upload_preset", "musicApp");
-        const res = await axios.post(
-          /*                        cloudname👇    👇 tipo de recurso     */
-          "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
-          data
-        );
-        $audiourl.value = res.data.secure_url
-      }
-    </script>
+            const data = new FormData()
+            data.append("file", e.target.files[0]);
+            data.append("upload_preset", "musicApp");
+            const res = await axios.post(
+              /*                        cloudname👇    👇 tipo de recurso     */
+              "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
+              data
+            );
+            $audiourl.value = res.data.secure_url
+          }
+        </script>
 
 
-    {{!-- Videos --}}
+        {{!-- Videos  33
     <div>
-<h2 style="font-size: 20px">Share a music video</h2>
- <form action="/videoPost" method="POST">
-  <div class="form-group" style="width:280px;">
-    <input type="text" id="input-content" name="content" placeholder="Your video´s title" />
-  </div>
-  <div class="form-group" style="width:280px;">
-    <input type="file" name="video" id="video" style="width:280px;"> <input type="text" id="videourl" name="videourl" hidden>
-  </div>
-  <button type="submit" class="btn btn-primary">Upload your song!</button>
-</form>
-</div>
+      <h2 style="font-size: 20px">Share a music video</h2>
+      <form action="/videoPost" method="POST">
+        <div class="form-group" style="width:280px;">
+          <input type="text" id="input-content" name="content" placeholder="Your video´s title" />
+        </div>
+        <div class="form-group" style="width:280px;">
+          <input type="file" name="video" id="video" style="width:280px;"> <input type="text" id="videourl"
+            name="videourl">
+        </div>
+        <button type="submit" class="btn btn-primary">Upload your song!</button>
+      </form>
+    </div>--}}
 
-{{!-- 
+        {{!-- 
     <form action="/videoPost" method="POST">
       <label for="content">Content:</label>
       <input type="text" id="input-content" name="content" placeholder="Your post content" />
@@ -154,73 +334,33 @@
       <button type="submit">Submit your music video</button>
     </form> --}}
 
-    <script>
-      const $videoInput = document.querySelector('#video')
-      const $videourl = document.querySelector('#videourl')
+        <script>
+          const $videoInput = document.querySelector('#video')
+          const $videourl = document.querySelector('#videourl')
 
-      $videoInput.onchange = async e => {
-        //e.target.files almacena los archivos selecionados
-        console.log(e.target.files[0])
+          $videoInput.onchange = async e => {
+            //e.target.files almacena los archivos selecionados
+            console.log(e.target.files[0])
 
-        const data = new FormData()
-        data.append("file", e.target.files[0]);
-        data.append("upload_preset", "musicApp");
-        const res = await axios.post(
-          /*                        cloudname👇    👇 tipo de recurso     */
-          "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
-          data
-        );
-        $videourl.value = res.data.secure_url
-      }
-    </script>
+            const data = new FormData()
+            data.append("file", e.target.files[0]);
+            data.append("upload_preset", "musicApp");
+            const res = await axios.post(
+              /*                        cloudname👇    👇 tipo de recurso     */
+              "https://api.cloudinary.com/v1_1/djkvj5wq9/video/upload",
+              data
+            );
+            $videourl.value = res.data.secure_url
+          }
+        </script>
 
-</div>
+      </div>
 
-{{!-- FORM PARA CONCIERTOS  --}}
-<div id="concertForm" style="padding-top: 35px; padding-bottom: 25px;">
-<div class="card">
-    <h5 class="card-header info-color white-text text-center py-4">
-        <strong>Create a concert!</strong>
-    </h5>
-    <!--Card content-->
-    <div class="card-body px-lg-5">
-        <!-- Form -->
-        <form action="/concert/new" method="POST" class="text-center" style="color: #757575;" action="#!">
-            <p>Set up your concert by filling the form below</p>
-            <!-- Name -->
-            <div class="md-form mt-3">
-                <input type="text" name="name" id="name" class="form-control">
-                <label for="name">Your concert's title</label>
-            </div>
-            <!-- Date -->
-            <div class="md-form">
-                <input type="date" name="date" id="date" class="form-control">
-                <label for="date">Date</label>
-            </div>
-            {{!-- PRICE --}}
-            <div class="md-form">
-                <input type="number" name="price" id="price" class="form-control">
-                <label for="price">Price</label>
-            </div>
-            {{!-- DURATION --}}
-            <div class="md-form">
-                <input type="text" name="duration" id="duration" class="form-control">
-                <label for="duration">Duration (in seconds)</label>
-            </div>
-            <!-- Sign in button -->
-            <button class="btn btn-outline-info btn-rounded btn-block z-depth-0 my-4 waves-effect" type="submit">Create your concert</button>
-        </form>
-        <!-- Form -->
+      
     </div>
-</div>
-</div>
-
-<div>
-  <a href="/edit">Edit all of your content</a>
-</div>
 
 
-{{!-- 
+    {{!-- 
 <h1>Create concert</h1>
 <form action="/concert/new" method="POST">
   <label for="name">Concert Name: </label>
@@ -241,7 +381,7 @@
 
 
 
-{{!-- 
+    {{!-- 
 <a href="/concert/new">Create New Concert</a> --}}
 
 
@@ -276,15 +416,19 @@
     {{/each }} --}}
 
 
-</div>
+  </div>
 
-{{!-- ACÁ VA EL DESMADRE --}}
+  <div class="mt-5">
+        <a href="/edit">Edit all of your content</a>
+      </div>
+
+  {{!-- ACÁ VA EL DESMADRE --}}
 
 
 
 
 
-{{!-- <h2>Share your music!</h2>
+  {{!-- <h2>Share your music!</h2>
   <form action="/posting" method="POST" id="upload" enctype="multipart/form-data">
     <label for="content">Content:</label>
     <input type="text" id="input-content" name="content" placeholder="Your post content" />
@@ -303,24 +447,8 @@
   <br> --}}
 
 
-{{!-- 
+  {{!-- 
 {{#each posts}}
 <p>{{content}}</p>
 <img src="{{picUrl}}" alt="foto">
 {{/each}} --}}
-
-{{#each tickets}}
-<p>Concert</p>
-<p>{{name}}</p>
-<p>Fecha: {{date}}</p>
-<p>${{price}}</p>
-<p>Stream Key:</p>
-<p>{{streamKey}}</p>
-<p>Server: rtmps://global-live.mux.com:443/app</p>
-<small>We recommend using OBS</small>
-<form action="/concert-detail" method="post">
-    <input type="text" name="name" value="{{name}}" hidden>
-    <input type="text" name="playbackId" value="{{playbackId}}" hidden>
-    <button type="submit">Go to Concert</button>
-</form>
-{{/each}}

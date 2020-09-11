@@ -1,4 +1,4 @@
-<div>
+{{!-- <div>
   <div class="card">
     <div class="card-body">
       <h5 class="card-title">{{this.name}}</h5>
@@ -7,8 +7,21 @@
       <h3>{{price}}</h3>
       {{#if @root.listener}}
       <form action="/concert-pay/{{_id}}" method="post">
-      <button type="submit">Bought Ticket</button>
+      <button type="submit">Buy Ticket</button>
       </form>
       {{/if}}
-</div>
+</div> --}}
 
+<div class="card">
+  <h5 class="card-header">{{this.name}}</h5>
+  <div class="card-body">
+    <h5 class="card-title">{{band}}</h5>
+    <p class="card-text">{{date}}</p>
+     <p class="card-text">${{price}}.00 MXN</p>
+    {{#if @root.listener}}
+      <form action="/concert-pay/{{_id}}" method="post">
+      <button type="submit">Buy Ticket</button>
+      </form>
+      {{/if}}
+  </div>
+</div>

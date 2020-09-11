@@ -66,6 +66,7 @@ exports.editConcert = async(req, res) => {
     res.redirect("/")
 }
 exports.deleteConcert = async(req, res) => {
-    await Concert.findByIdAndDelete(req.params.movieId)
-    res.redirect("/")
+    const { _id } = req.body
+    await Concert.findByIdAndDelete(_id)
+    res.redirect("/profile")
 }
