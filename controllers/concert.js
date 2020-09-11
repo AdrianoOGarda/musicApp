@@ -37,7 +37,7 @@ exports.createConcert = async(req, res) => {
     })
     const { _id } = newConcert
     await User.findByIdAndUpdate(req.user._id, { $push: { tickets: _id } }, { new: true })
-    res.redirect("/")
+    res.redirect("/profile")
 }
 
 

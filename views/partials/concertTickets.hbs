@@ -1,4 +1,4 @@
-<div>
+{{!-- <div>
   <div class="card">
     <div class="card-body">
       <h3>Cocierto Comprado</h2>
@@ -10,4 +10,19 @@
       <input type="text" name="playbackId" value="{{playbackId}}" hidden>
       <button type="submit">Go to Concert</button>
       </form>
-</div>
+</div> --}}
+
+<div class="p-3 mb-2 bg-success text-white"style="max-width: 18rem;">
+  <div class="card-header">Bought ticket 
+     <img style="width: 50px"  src="{{this.imageUrl}}" alt="{{this.username}}"/>
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">{{this.name}}</h5>
+    <h5 class="card-title">{{band}}</h5>
+   <form action="/concert-detail" method="post">
+      <input type="text" name="streamKey" value="{{streamKey}}" hidden>
+      <input type="text" name="name" value="{{name}}" hidden>
+      <input type="text" name="playbackId" value="{{playbackId}}" hidden>
+      <button type="submit">Go to Concert</button>
+      </form>
+      </div>

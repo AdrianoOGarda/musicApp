@@ -13,11 +13,14 @@ exports.private = async(req, res) => {
 }
 
 exports.home = async(req, res) => {
-    const posts = await Post.find()
+    const posts = await Post.find().populate("creatorId")
     const musicians = await User.find({ role: 'MUSICIAN' })
-    const songs = await Music.find()
-    const videos = await Video.find()
-    const musicianConcerts = await Concert.find()
+    const songs = await Music.find().populate("creatorId")
+    const videos = await Video.find().populate("creatorId")
+    const musicianConcerts = await Concert.find().populate("musicianId")
+
+    console.log('posts')
+    console.log(posts)
     res.render('index', { posts, musicians, songs, videos, musicianConcerts, user: req.user });
 }
 
