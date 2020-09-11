@@ -1,4 +1,4 @@
-<div class="col-md-4">
+{{!-- <div class="col-md-4">
   <div class="card">
     <img style="width: 50px" class="card-img-top" src="{{this.imageUrl}}" alt="{{this.username}}"/>
     <div class="card-body">
@@ -8,5 +8,23 @@
     <input type="text" name="name" id="name" value="{{this.username}}" hidden>
     <button type="submit">Follow</button>
     </form>
+  </div>
+</div> --}}
+
+
+<div class="col-lg-4">
+  <div class="card">
+    <div class="card-body">
+
+      <div
+        style="border-radius: 50%; overflow: hidden; display: flex; align-items: center; justify-content: center; width: 60px; height: 60px; border: 1px solid black; margin:5px;">
+        <img class="card-img-top" src="{{this.imageUrl}}" alt="{{this.username}}" style="width: 50px">
+      </div>
+      <h5 class="card-title">{{this.username}}</h5>
+      <form action="/follow" method="post">
+        <input type="text" name="name" id="name" value="{{this.username}}" hidden>
+        <button type="submit">Follow</button>
+      </form>
+    </div>
   </div>
 </div>

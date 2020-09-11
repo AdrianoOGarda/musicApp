@@ -26,6 +26,6 @@ router.post("/video/edit/:videoId", editVideo)
 router.get("/video/delete/:videoId", deleteVideo)
 
 router.post("/concert/edit/:concertId", editConcert)
-router.get("/concert/delete/:concertId", deleteConcert)
+router.post("/delete-concert/:concertId", deleteConcert)
 
 module.exports = router;

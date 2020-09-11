@@ -37,7 +37,7 @@ exports.createConcert = async(req, res) => {
     })
     const { _id } = newConcert
     await User.findByIdAndUpdate(req.user._id, { $push: { tickets: _id } }, { new: true })
-    res.redirect("/")
+    res.redirect("/profile")
 }
 
 
@@ -48,7 +48,7 @@ exports.concertDetail = (req, res) => {
 
 exports.concertPay = async(req, res) => {
     const concert = await Concert.findById(req.params.concertId)
-        //console.log(concert)
+
     const { name, band, price, _id } = concert
     const preference = {
         items: [{

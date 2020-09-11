@@ -7,6 +7,6 @@ exports.googleProcess = passport.authenticate("google", {
     ]
 })
 exports.googleRedirect = passport.authenticate("google", {
-    successRedirect: "/profile",
+    successRedirect: "/listener",
     failureRedirect: "/auth/login"
 })

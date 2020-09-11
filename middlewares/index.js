@@ -13,6 +13,7 @@ exports.checkRole = role => (req, res, next) => {
         res.redirect("/")
     }
 }
+exports.catchErrors = controller => (req, res, next) => controller(req, res).catch(next)
 
 exports.setLocals = app => (req, res, next) => {
     if (req.isAuthenticated()) {

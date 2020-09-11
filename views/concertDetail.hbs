@@ -1,12 +1,24 @@
-<h1>Concert: {{ name }}</h1>
 
-<video id="myVideo" controls></video>
+
+<div id="particles-foreground" class="vertical-centered-box"></div>
+<div id="particles-background" class="vertical-centered-box"></div>
+
+<div class="container-fluid profile-container" style="background-color:black; height: 100vh; color: white; margin:0">
+  <div class="row justify-content-center align-items-center pt-5">
+    <h1>Concert: {{ name }}</h1>
+  </div>
+  <div class="row justify-content-center align-items-center mt-5">
+    <video width="60%" id="myVideo" controls style="z-index:1"></video>
+  </div>
+</div>
+
+
 
 <!-- Use HLS.js to support the HLS format in browsers. -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@0.8.2"></script>
 
 <script>
-  ;(function () {
+  ; (function () {
     // Replace with your asset's playback ID
     var playbackId = "{{playbackId}}"
     var url = "https://stream.mux.com/" + playbackId + ".m3u8"
@@ -22,4 +34,3 @@
     }
   })()
 </script>
-
