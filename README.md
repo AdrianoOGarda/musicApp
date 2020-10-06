@@ -1,7 +1,9 @@
 # gigstock
-Bienvenidos a gigstock! 
-Como proyecto de módulo dos del bootcamp de Web Development de Ironhack desarrollamos una aplicación para streaming de conciertos en vivo. 
+Welcome to gigstock! 
+As Ironhack's Web Devlopment Bootcamp second project, we developed a full stack web application for the live streaming of concerts. It was made using node.js (NODE.JS, CSS, JAVASCRIPT, MUX). 
+ 
+To test the application, simply create an account and login! ### :wink: 
 
-Para probar la página, simplemente crea un usuario y haz login ;) 
+Once inside the app, if registered as a band/musician, you'll be able to upload content and schedule pay concerts for users to buy tickets and assist to the live streaming. ### :guitar:
 
-Una vez dentro de la app, si estás registrado como usuario de tipo banda/músico, podrás subir contenido y programar conciertos de paga para los que los usuarios podrán comprar boletos y asistir. 
+
